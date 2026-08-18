@@ -1,8 +1,11 @@
 import './App.css';
 import { useMap } from './hooks/useMap';
+import { useCountyLayer } from './hooks/useCountyLayer';
 
 function App() {
-  const [containerRef, _] = useMap();
+  const [containerRef, mapRef] = useMap();
+
+  useCountyLayer(mapRef);
 
   return(
     <main className = "app">

@@ -79,7 +79,7 @@ export const MAP_CONFIG = {
             type    : 'fill',
             source  : 'countyLayerSource',
             paint   : {
-                'fill-color' : 'rgba(0,0,0,0.3)',
+                'fill-color' : 'rgba(0,0,0,0.6)',
                 'fill-opacity': 0,
                 'fill-opacity-transition': { duration : 300}
             }

@@ -57,8 +57,8 @@ export function useCountyLayer(
             if (e.features && e.features.length > 0) {
                 let id = e.features[0].properties.MKOOD;
 
-                if (selectedRef.current?.id === id)  setSelectedCounty(null);
-                else                            setSelectedCounty({ id : id, feature : e.features[0]});
+                if (selectedRef.current?.id === id) setSelectedCounty(null);
+                else                                setSelectedCounty({ id : id, feature : e.features[0]});
             }
         };
 

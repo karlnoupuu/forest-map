@@ -19,3 +19,41 @@ html, body, #root {
     flex: 1;
     background: #000000;
 }
+
+
+
+/* Time scrubber */
+.scrubber__wrapper          {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+
+    cursor: default;
+
+    padding: 0px 0px 0px 8px;
+    gap: 8px;
+
+    z-index: 1;
+
+    height: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow-y: hidden;
+}
+.scrubber__year             {
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+
+    margin: 2px;
+
+    opacity: 0.5;
+}
+.scrubber__year--selected   {
+    font-size: 16px;
+    font-weight: 550;
+    opacity: 1;
+    cursor: default;
+    margin-left: 8px;
+}

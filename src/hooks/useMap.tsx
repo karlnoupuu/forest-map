@@ -1,35 +1,34 @@
 import { useEffect, useRef } from "react";
-import { Map } from 'maplibre-gl';
+import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+
+import { MAP_CONFIG } from "../config/map";
 
 export function useMap() {
     const containerRef  = useRef<HTMLDivElement | null>(null);
-    const mapRef        = useRef<Map | null>(null);
+    const mapRef        = useRef<maplibregl.Map | null>(null);
 
     useEffect(() => {
         if (!containerRef.current) return;
 
-        const map = new Map({
+        const map = new maplibregl.Map({
             container : containerRef.current,
             style : {
                 version: 8,
                 sources: {
-                    'carto-basemap': {
-                        type        : 'raster',
-                        tiles       : ['https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'],
-                        tileSize    : 256
-                    }
+                    [MAP_CONFIG.sources.basemap.id] : MAP_CONFIG.sources.basemap.data
+        
                 },
                 layers: [
-                    {
-                        id : 'basemap',
-                        type: 'raster',
-                        source: 'carto-basemap'
-                    },
+                    MAP_CONFIG.layers.basemap
                 ]
             },
-            center: [24.75, 58.4],
-            zoom: 6.5,
+            center      : MAP_CONFIG.center,
+            zoom        : MAP_CONFIG.zoom,
+            dragPan     : MAP_CONFIG.dragPan,
+            keyboard    : MAP_CONFIG.keyboard,
+            scrollZoom  : MAP_CONFIG.scrollZoom,
+            doubleClickZoom : MAP_CONFIG.doubleClickZoom,
         });
 
         mapRef.current = map;

@@ -54,11 +54,7 @@ export const MAP_CONFIG = {
             type    : 'fill',
             source  : 'countyLayerSource',
             paint   : {
-                'fill-color' : [
-                    'case',
-                    ['boolean', ['feature-state', 'selected'], false], 'transparent',
-                    'transparent'
-                ]
+                'fill-color' : 'transparent'
             }
         },
         countyFillHover : {

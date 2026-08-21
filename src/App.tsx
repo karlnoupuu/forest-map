@@ -1,16 +1,31 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useMap } from './hooks/useMap';
 import { useCountyLayer } from './hooks/useCountyLayer';
 import * as maplibregl from 'maplibre-gl';
 import TimeScrubber from './components/TimeScrubber';
+import GraphPanel from './components/GraphPanel';
+
+import type { ForestryData } from './types/ForestryData';
 
 function App() {
-  const [_selectedCounty, setSelectedCounty] = useState<{ id : string, feature : maplibregl.MapGeoJSONFeature } | null>(null);
-  const [selectedYear, setSelectedYear] = useState<number>(2000);
-  const [containerRef, mapRef] = useMap();
+  const [selectedCounty, setSelectedCounty] = useState<{ id : string, name : string, feature : maplibregl.MapGeoJSONFeature } | null>(null);
+  const [selectedYear, setSelectedYear] = useState<number>(2015);
+  const [containerRef, mapRef]        = useMap();
 
-  useCountyLayer(containerRef, mapRef, _selectedCounty, setSelectedCounty);
+  useCountyLayer(containerRef, mapRef, selectedCounty, setSelectedCounty);
+
+  const forestryData = useRef<ForestryData | null>(null);
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  useEffect(() => {
+    fetch('/data/data.json')
+      .then(res => res.json())
+      .then(data => {
+        forestryData.current = data;
+        setDataLoaded(true);
+      });
+  }, []);
 
   return(
     <main className = "app">
@@ -22,7 +37,14 @@ function App() {
           maxYear = {2025}
         ></TimeScrubber>
       </div>
-      <div className = "graph-container"></div>
+      <div className = "graph-container">
+        <GraphPanel
+          graphIds = {[]}
+          graphData = {forestryData.current}
+          selectedCounty = {selectedCounty}
+          selectedYear = {selectedYear}
+        ></GraphPanel>
+      </div>
     </main>
   )
 }

@@ -6,8 +6,8 @@ import { MAP_CONFIG } from '../config/map';
 export function useCountyLayer(
     containerRef        : React.RefObject<HTMLDivElement | null>,
     mapRef              : React.RefObject<maplibregl.Map | null>,
-    selectedCounty      : { id : string, feature : maplibregl.MapGeoJSONFeature } | null,
-    setSelectedCounty   : React.Dispatch<React.SetStateAction<{ id : string, feature : maplibregl.MapGeoJSONFeature} | null>>,
+    selectedCounty      : { id : string, name : string, feature : maplibregl.MapGeoJSONFeature } | null,
+    setSelectedCounty   : React.Dispatch<React.SetStateAction<{ id : string, name : string, feature : maplibregl.MapGeoJSONFeature} | null>>,
 ) {
     const countyLinesSourceId   = MAP_CONFIG.sources.counties.id; 
     const countyFillLayerId     = MAP_CONFIG.layers.countyFill.id;
@@ -58,7 +58,7 @@ export function useCountyLayer(
                 let id = e.features[0].properties.MKOOD;
 
                 if (selectedRef.current?.id === id) setSelectedCounty(null);
-                else                                setSelectedCounty({ id : id, feature : e.features[0]});
+                else                                setSelectedCounty({ id : id, name : e.features[0].properties.MNIMI, feature : e.features[0]});
             }
         };
 
@@ -217,13 +217,6 @@ export function useCountyLayer(
             map.setPaintProperty(countyDimLayerId, 'fill-opacity', 0);
         }
 
-        return () => {
-            if (selectedCounty) {
-                map.setFeatureState(
-                    { source : countyLinesSourceId, id : selectedCounty.id},
-                    { selected : false}
-                );
-            }
-        };
+        return () => {};
     }, [selectedCounty]);
 }

@@ -43,7 +43,7 @@ html, body, #root {
 
     z-index: 1;
 
-    height: 50%;
+    height: 30%;
     top: 50%;
     transform: translateY(-50%);
     overflow-y: hidden;

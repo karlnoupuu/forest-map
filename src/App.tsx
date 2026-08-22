@@ -2,14 +2,13 @@ import './App.css';
 import { useState, useRef, useEffect } from 'react';
 import { useMap } from './hooks/useMap';
 import { useCountyLayer } from './hooks/useCountyLayer';
-import * as maplibregl from 'maplibre-gl';
 import TimeScrubber from './components/TimeScrubber';
 import GraphPanel from './components/GraphPanel';
 
 import type { ForestryData } from './types/ForestryData';
 
 function App() {
-  const [selectedCounty, setSelectedCounty] = useState<{ id : string, name : string, feature : maplibregl.MapGeoJSONFeature } | null>(null);
+  const [selectedCounty, setSelectedCounty] = useState<{ id : string, name : string} | null>(null);
   const [selectedYear, setSelectedYear] = useState<number>(2015);
   const [containerRef, mapRef]        = useMap();
 

@@ -1,31 +1,26 @@
 import type { GraphProp } from "./GraphProp";
 import LandAreaChart from "./LandAreaChart";
-import { useState } from "react";
+import StackedBarChart from "./StackedBarChart";
+import { useState, useMemo } from "react";
 import Tooltip from "./Tooltip";
+import type { ForestryData, AreaByYear } from "../types/ForestryData";
+import type { TreeCompositionData } from "../types/TreeCompositionData";
 
-export function Graph({ title, selectedCounty, selectedYear, data } : GraphProp) {
-
-    if (!data) return null;
-
-    const selectData = Object.entries(data)
-    .filter(([year]) => {
-        const y = Number(year);
-        return y >= selectedYear - 5 && y <= selectedYear + 5;
-    })
-    .map(([year, counties]) => {
-        const county = counties[selectedCounty ?? '0000'];
-        return {
-        year: Number(year),
-        stateForest: county.stateForest.managedForestArea / 1000,
-        privateForest: county.privateForest.managedForestArea / 1000,
-        totalForest: county.totalForest.managedForestArea / 1000,
-        };
-    });
-
-    if (!selectData) return;
-
+export function Graph({ type, title, selectedCounty, selectedYear, data } : GraphProp) {
     const [showTooltip, setShowTooltip] = useState(false);
     const tooltipMessage : string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
+
+    const areaData = useMemo(
+        () => data ? convertDataAreachart({ data, selectedYear, selectedCounty }) : [],
+        [data, selectedYear, selectedCounty]
+    );
+
+    const barData = useMemo(
+        () => data ? convertDataTreemap({ data, selectedYear, selectedCounty }) : [],
+        [data, selectedYear, selectedCounty]
+    );
+    
+    if (!data) return null;
 
     return (
         <section className = 'graph__wrapper'>
@@ -42,10 +37,57 @@ export function Graph({ title, selectedCounty, selectedYear, data } : GraphProp)
             </header>
             <Tooltip text = {tooltipMessage} visible = {showTooltip}/>
             <div className = 'graph__content'>
-                <LandAreaChart
-                    data = {selectData}
-                ></LandAreaChart>
+                {type === 'areachart' ? 
+                    <LandAreaChart
+                        data = {areaData}
+                    ></LandAreaChart>
+                    :
+                    <StackedBarChart
+                        data = {barData}
+                    >
+                    </StackedBarChart>
+                }
             </div>
         </section>
     )
+}
+
+function convertDataTreemap({ data, selectedYear, selectedCounty } : 
+    {
+        data            : ForestryData;
+        selectedCounty  : string | undefined;
+        selectedYear    : number;
+    }) : TreeCompositionData[] {
+    const SPECIES_ORDER = ['PINE', 'SPRUCE', 'BIRCH', 'BLK_ALDER', 'ASPEN', 'GRY_ALDER', 'ASH', 'OAK', 'OTHERS'];
+    
+    const countyData = data[selectedYear][selectedCounty ?? '0000'];
+
+    return SPECIES_ORDER.map((species, i) => ({
+        species : species.toLowerCase(),
+        stateForest: countyData.stateForest.data[i] / countyData.totalForest.managedForestArea * 100,
+        privateForest: countyData.privateForest.data[i] / countyData.totalForest.managedForestArea * 100,
+    }));
+}
+
+function convertDataAreachart({ data, selectedYear, selectedCounty } : 
+    {
+        data            : ForestryData;
+        selectedCounty  : string | undefined;
+        selectedYear    : number;
+    }
+) : AreaByYear[] {
+    return Object.entries(data)
+    .filter(([year]) => {
+        const y = Number(year);
+        return y >= selectedYear - 4 && y <= selectedYear + 4;
+    })
+    .map(([year, counties]) => {
+        const county = counties[selectedCounty ?? '0000'];
+        return {
+            year: Number(year),
+            stateForest: county.stateForest.managedForestArea / 1000,
+            privateForest: county.privateForest.managedForestArea / 1000,
+            totalForest: county.totalForest.managedForestArea / 1000,
+        };
+    });
 }

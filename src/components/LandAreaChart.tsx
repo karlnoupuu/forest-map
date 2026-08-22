@@ -1,8 +1,5 @@
 import { AreaChart, CartesianGrid, XAxis, YAxis, Area, Legend } from "recharts";
-import { generateMockData } from "./TimeLineChart";
-import type { AreaByYear, YearlyCountyData } from "../types/ForestryData";
-
-const data : Array<{}> = generateMockData(2000, 2026);
+import type { AreaByYear } from "../types/ForestryData";
 
 const COLORS = {
   stateForest: '#1a4301',   // darkest — deep forest floor
@@ -11,8 +8,6 @@ const COLORS = {
 };
 
 export default function LandAreaChart( { data } : { data : AreaByYear[] }){
-    console.log(data);
-
     return (
         <AreaChart
             style = {{ width : '100%', maxWidth : '800px', margin : 'auto', aspectRatio : 1.618}}
@@ -54,8 +49,8 @@ export default function LandAreaChart( { data } : { data : AreaByYear[] }){
                 fillOpacity = {1}
                 fill = "url(#privateForest)"
                 isAnimationActive = {true}
-                animationBegin={200}
-                animationDuration={1300}
+                animationBegin={0}
+                animationDuration={300}
             />
             <Area
                 type = 'monotone'
@@ -63,6 +58,8 @@ export default function LandAreaChart( { data } : { data : AreaByYear[] }){
                 stroke = {COLORS.stateForest}
                 fillOpacity = {1}
                 fill = "url(#stateForest)"
+                animationBegin={0}
+                animationDuration={300}
                 isAnimationActive = {true}
             />
             <Area
@@ -71,6 +68,7 @@ export default function LandAreaChart( { data } : { data : AreaByYear[] }){
                 stroke = {COLORS.totalForest}
                 fillOpacity = {1}
                 fill = "url(#totalForest)"
+                animationDuration={300}
                 isAnimationActive = {true}
             />
             <Legend/>

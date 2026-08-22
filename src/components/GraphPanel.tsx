@@ -59,10 +59,18 @@ export default function GraphPanel(
             </header>
             <div className = 'graph-panel__content'>
                 <Graph
-                    title = {'Korraldatud metsaala (tuhat ha)'}
-                    selectedCounty = {selectedCounty?.id}
-                    selectedYear   = {selectedYear}
-                    data = {graphData}
+                    type            = {'treemap'}
+                    title           = {'Metsakooslus (%)'}
+                    selectedCounty  = {selectedCounty?.id}
+                    selectedYear    = {selectedYear}
+                    data            = {graphData}
+                ></Graph>
+                <Graph
+                    type            = {'areachart'}
+                    title           = {'Korraldatud metsaala (tuhat ha)'}
+                    selectedCounty  = {selectedCounty?.id}
+                    selectedYear    = {selectedYear}
+                    data            = {graphData}
                 ></Graph>
             </div>
         </section>

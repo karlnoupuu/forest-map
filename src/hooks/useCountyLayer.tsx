@@ -6,8 +6,8 @@ import { MAP_CONFIG } from '../config/map';
 export function useCountyLayer(
     containerRef        : React.RefObject<HTMLDivElement | null>,
     mapRef              : React.RefObject<maplibregl.Map | null>,
-    selectedCounty      : { id : string, name : string, feature : maplibregl.MapGeoJSONFeature } | null,
-    setSelectedCounty   : React.Dispatch<React.SetStateAction<{ id : string, name : string, feature : maplibregl.MapGeoJSONFeature} | null>>,
+    selectedCounty      : { id : string, name : string} | null,
+    setSelectedCounty   : React.Dispatch<React.SetStateAction<{ id : string, name : string} | null>>,
 ) {
     const countyLinesSourceId   = MAP_CONFIG.sources.counties.id; 
     const countyFillLayerId     = MAP_CONFIG.layers.countyFill.id;
@@ -58,7 +58,7 @@ export function useCountyLayer(
                 let id = e.features[0].properties.MKOOD;
 
                 if (selectedRef.current?.id === id) setSelectedCounty(null);
-                else                                setSelectedCounty({ id : id, name : e.features[0].properties.MNIMI, feature : e.features[0]});
+                else                                setSelectedCounty({ id : id, name : e.features[0].properties.MNIMI});
             }
         };
 

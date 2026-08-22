@@ -1,9 +1,9 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer, Tooltip } from "recharts";
-import type { TreeCompositionData } from "../types/TreeCompositionData";
+import type { AreaChartProps } from "./ChartProp";
 
-export default function StackedBarChart({ data } : {
-    data : TreeCompositionData[];
-}) {
+export default function CustomStackedBarChart( { data, xKey, areas } : AreaChartProps ) {
+    if (!data) return null;
+
     return (
         <ResponsiveContainer width = '100%' aspect = {1.618}>
             <BarChart
@@ -11,10 +11,19 @@ export default function StackedBarChart({ data } : {
                 barSize = {32}
             >
                 <CartesianGrid strokeDasharray = "5 5"/>
-                <XAxis dataKey="species" angle = {-30} fontSize = {12} interval = {0} height = {45} textAnchor="end"/>
+                <XAxis dataKey={xKey} angle = {-30} fontSize = {12} interval = {0} height = {45} textAnchor="end"/>
                 <YAxis width = {32} fontSize = {12}/>
                 <Legend/>
                 <Tooltip/>
+                {areas.map(area => (
+                    <Bar
+                        key     =   {area.dataKey}
+                        dataKey =   {area.dataKey}
+                        stackId =   {'a'}
+                        fill    =   '#1a4301'
+                    />
+                ))}
+
                 <Bar dataKey = 'stateForest' stackId = 'a' fill='#1a4301'/>
                 <Bar dataKey = 'privateForest' stackId = 'a' fill = '#4c7a34'/>
             </BarChart>

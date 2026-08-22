@@ -1,9 +1,19 @@
-import type { ForestryData } from '../types/ForestryData';
+import type { ForestryData, DeforestData } from '../types/ForestryData';
+import type { AreaChartArea } from './ChartProp';
 
 export interface GraphProp {
-    type            : string;
-    title           : string;
-    selectedCounty  : string | undefined;
+    config          : GraphDef;
+    selectedCounty  : string;
     selectedYear    : number;
-    data            : ForestryData | null;
+    data            : ForestryData | DeforestData | null;
+}
+
+export interface GraphDef {
+    key     : string;
+    type    : string;
+    title   : string;
+    dataIdx : number;
+    xKey    : string;
+    convert : (data : any, year : number, county : string) => Record<string, number>[];
+    areas   : AreaChartArea[];
 }

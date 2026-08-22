@@ -4,26 +4,31 @@ import { useMap } from './hooks/useMap';
 import { useCountyLayer } from './hooks/useCountyLayer';
 import TimeScrubber from './components/TimeScrubber';
 import GraphPanel from './components/GraphPanel';
-import type { ForestryData } from './types/ForestryData';
+import type { ForestryData, DeforestData } from './types/ForestryData';
 import BlobPanel from './components/BlobPanel';
 
+export const DEFAULT_COUNTY = { id : '0000', name : 'Eesti'};
+
 function App() {
-  const [selectedCounty, setSelectedCounty] = useState<{ id : string, name : string} | null>(null);
+  const [selectedCounty, setSelectedCounty] = useState<{ id : string, name : string}>(DEFAULT_COUNTY);
   const [selectedYear, setSelectedYear] = useState<number>(2015);
   const [containerRef, mapRef]        = useMap();
 
   useCountyLayer(containerRef, mapRef, selectedCounty, setSelectedCounty);
 
   const forestryData = useRef<ForestryData | null>(null);
+  const deforestData = useRef<DeforestData | null>(null);
   const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
-    fetch('/data/data.json')
-      .then(res => res.json())
-      .then(data => {
-        forestryData.current = data;
-        setDataLoaded(true);
-      });
+    Promise.all([
+      fetch('/data/data.json').then(res => res.json()),
+      fetch('/data/data_deforestation_reforestation.json').then(res => res.json()),
+    ]).then(([forestry, deforest]) => {
+      forestryData.current = forestry;
+      deforestData.current = deforest;
+      setDataLoaded(true);
+    })
   }, []);
 
   return(
@@ -35,8 +40,7 @@ function App() {
       </div>
       <div className = "graph-container">
         <GraphPanel
-          graphIds = {[]}
-          graphData = {forestryData.current}
+          graphData = {[forestryData.current, deforestData.current]}
           selectedCounty = {selectedCounty}
           selectedYear = {selectedYear}
         ></GraphPanel>

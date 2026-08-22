@@ -26,9 +26,10 @@ html, body, #root {
 
 .graph-container {
     flex: 1;
+    background: transparent;
 }
 
-.section__wrapper {
+.toolbar__wrapper {
     display: flex;
     flex-direction: row;
     gap: 16px;
@@ -40,14 +41,6 @@ html, body, #root {
 
     background: var(--bg-surface);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.75);
-}
-
-.section__icon {
-    width: 36px;
-    height: 36px;
-}
-.section__icon:hover {
-    color: green;
 }
 
 /* Top-left custom panel */
@@ -313,3 +306,14 @@ html, body, #root {
     font-size: 14px;
     font-weight: 500;
 }
+
+
+
+
+
+
+/* ----- Icon related ----- */
+.icon__wrapper          {cursor: pointer;           }
+.icon__wrapper--small   {width: 12px; height: 12px; }
+.icon__wrapper--medium  {width: 24px; height: 24px; }
+.icon__wrapper--large   {width: 36px; height: 36px; }

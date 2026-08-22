@@ -3,11 +3,13 @@ import * as maplibregl from 'maplibre-gl';
 import * as GeoJSON from 'geojson';
 import { MAP_CONFIG } from '../config/map';
 
+import { DEFAULT_COUNTY } from '../App';
+
 export function useCountyLayer(
     containerRef        : React.RefObject<HTMLDivElement | null>,
     mapRef              : React.RefObject<maplibregl.Map | null>,
-    selectedCounty      : { id : string, name : string} | null,
-    setSelectedCounty   : React.Dispatch<React.SetStateAction<{ id : string, name : string} | null>>,
+    selectedCounty      : { id : string, name : string},
+    setSelectedCounty   : React.Dispatch<React.SetStateAction<{ id : string, name : string}>>,
 ) {
     const countyLinesSourceId   = MAP_CONFIG.sources.counties.id; 
     const countyFillLayerId     = MAP_CONFIG.layers.countyFill.id;
@@ -57,7 +59,7 @@ export function useCountyLayer(
             if (e.features && e.features.length > 0) {
                 let id = e.features[0].properties.MKOOD;
 
-                if (selectedRef.current?.id === id) setSelectedCounty(null);
+                if (selectedRef.current?.id === id) setSelectedCounty(DEFAULT_COUNTY);
                 else                                setSelectedCounty({ id : id, name : e.features[0].properties.MNIMI});
             }
         };
@@ -145,7 +147,7 @@ export function useCountyLayer(
         const map = mapRef.current;
         if (!map) return;
 
-        if (!selectedCounty) {
+        if (selectedCounty.id === DEFAULT_COUNTY.id) {
             map.flyTo({ 
                 center  : MAP_CONFIG.center, 
                 zoom    : MAP_CONFIG.zoom,
@@ -210,7 +212,7 @@ export function useCountyLayer(
         const map = mapRef.current;
         if (!map || !map.isStyleLoaded()) return;
 
-        if (selectedCounty) {
+        if (selectedCounty.id !== DEFAULT_COUNTY.id) {
             map.setFilter(countyDimLayerId, ['!=', 'MKOOD', selectedCounty.id]);
             map.setPaintProperty(countyDimLayerId, 'fill-opacity', 1);
         } else {

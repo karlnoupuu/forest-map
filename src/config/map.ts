@@ -12,7 +12,7 @@ export const MAP_CONFIG = {
         duration: 800,
         zoom    : 8.5,
         curve   : 1,
-        speed   : 0.6
+        speed   : 0.6,
     },
     sources : {
         basemap : {

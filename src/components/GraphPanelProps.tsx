@@ -1,8 +1,7 @@
-import type { ForestryData } from '../types/ForestryData';
+import type { ForestryData, DeforestData } from '../types/ForestryData';
 
 export interface GraphPanelProps {
-    graphIds : number[];
-    graphData : ForestryData | null;
-    selectedCounty : { id : string, name : string} | null;
+    graphData : (ForestryData | DeforestData | null)[];
+    selectedCounty : { id : string, name : string};
     selectedYear : number
 }

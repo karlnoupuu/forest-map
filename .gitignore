@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+public/data/Maakonnad.csv
+public/scripts
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

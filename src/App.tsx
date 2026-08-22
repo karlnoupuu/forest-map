@@ -4,8 +4,8 @@ import { useMap } from './hooks/useMap';
 import { useCountyLayer } from './hooks/useCountyLayer';
 import TimeScrubber from './components/TimeScrubber';
 import GraphPanel from './components/GraphPanel';
-
 import type { ForestryData } from './types/ForestryData';
+import BlobPanel from './components/BlobPanel';
 
 function App() {
   const [selectedCounty, setSelectedCounty] = useState<{ id : string, name : string} | null>(null);
@@ -28,13 +28,10 @@ function App() {
 
   return(
     <main className = "app">
+      <BlobPanel
+        timeScrubber = {<TimeScrubber selectedYear = {selectedYear} setSelectedYear = {setSelectedYear} minYear = {1950} maxYear = {2025}/>}
+      />
       <div className = "map-container" ref = {containerRef}>
-        <TimeScrubber
-          selectedYear = {selectedYear}
-          setSelectedYear = {setSelectedYear}
-          minYear = {1950}
-          maxYear = {2025}
-        ></TimeScrubber>
       </div>
       <div className = "graph-container">
         <GraphPanel

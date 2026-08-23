@@ -1,7 +1,11 @@
 import * as maplibregl from 'maplibre-gl';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { MAP_CONFIG } from '../config/map';
+
+import { DATA_YEAR_RANGES } from '../config/general';
+import { DEFAULT_YEAR } from '../App';
+import { clampYear } from '../converters';
 
 export function useForestLayer(
     mapRef          : React.RefObject<maplibregl.Map | null>,
@@ -54,8 +58,14 @@ export function useForestLayer(
 
 
     /* ----- Forest layer update ----- */
+    const effectiveYear = useRef<number>(DEFAULT_YEAR);
     useEffect(() => {
         if (!map || !mapReady) return;
+
+        const clampedYear = clampYear(selectedYear, DATA_YEAR_RANGES.forestLayer);
+        
+        if (clampedYear === effectiveYear.current) return;
+        effectiveYear.current = clampedYear;
 
         const source = map.getSource(forestLayerSourceId) as maplibregl.ImageSource;
         if (!source) return;
@@ -63,7 +73,7 @@ export function useForestLayer(
         map.setPaintProperty(MAP_CONFIG.layers.forest.id, 'raster-opacity', 0);
 
         setTimeout(() => {
-            source.updateImage({ url : MAP_CONFIG.sources.forest.getUrl(selectedYear)});
+            source.updateImage({ url : MAP_CONFIG.sources.forest.getUrl(effectiveYear.current)});
 
             map.once('idle', () => {
                 map.setPaintProperty(MAP_CONFIG.layers.forest.id, 'raster-opacity', 1);

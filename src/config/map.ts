@@ -2,7 +2,8 @@ import type { ImageSourceSpecification, SourceSpecification } from "maplibre-gl"
 
 export const MAP_CONFIG = {
     center: [24.75, 58.6] as [number, number],
-    zoom: 7 as number,
+    iniZoom : 1 as number,
+    maxZoom : 7 as number,
     dragPan: false,
     keyboard: false,
     scrollZoom: false,
@@ -14,6 +15,7 @@ export const MAP_CONFIG = {
         curve   : 1,
         speed   : 0.6,
     },
+    bounds  :[[21.5, 57.5], [28.2, 59.7]],
     sources : {
         basemap : {
             id      : 'cartoBaseMap',
@@ -75,9 +77,9 @@ export const MAP_CONFIG = {
                 'fill-extrusion-rounded-corner-distance' : 2,
             },
             paint   : {
-                'fill-extrusion-color'  : '#0f572f',
+                'fill-extrusion-color'  : '#3b82f6',
                 'fill-extrusion-height' : 10000,
-                'fill-extrusion-opacity': 0.5
+                'fill-extrusion-opacity': 0.65
             }
         },
         countyDim   : {
@@ -85,7 +87,7 @@ export const MAP_CONFIG = {
             type    : 'fill',
             source  : 'countyLayerSource',
             paint   : {
-                'fill-color' : 'rgba(0,0,0,0.6)',
+                'fill-color' : 'rgba(0,0,0,0.5)',
                 'fill-opacity': 0,
                 'fill-opacity-transition': { duration : 300}
             }

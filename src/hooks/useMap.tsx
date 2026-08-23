@@ -30,8 +30,7 @@ export function useMap() {
                     MAP_CONFIG.layers.basemap
                 ]
             },
-            center      : MAP_CONFIG.center,
-            zoom        : MAP_CONFIG.zoom,
+            zoom        : MAP_CONFIG.iniZoom,
             dragPan     : MAP_CONFIG.dragPan,
             keyboard    : MAP_CONFIG.keyboard,
             scrollZoom  : MAP_CONFIG.scrollZoom,
@@ -39,12 +38,37 @@ export function useMap() {
         });
 
         mapRef.current = map;
-        map.on('load', () => setMapReady(true));
+        map.on('load', () => {
+            map.fitBounds(
+                MAP_CONFIG.bounds as maplibregl.LngLatBoundsLike,
+                { padding : 20, maxZoom : MAP_CONFIG.maxZoom }
+            );
+            setMapReady(true)
+        });
+
+        
 
         return () => {
             map.remove();
         }
     }, []);
+
+    useEffect(() => {
+        const map = mapRef.current;
+
+        if (!map || !mapReady) return;
+
+        const handleResize = () => {
+            map.resize();
+            map.fitBounds(
+                MAP_CONFIG.bounds  as maplibregl.LngLatBoundsLike,
+                { padding : 20, maxZoom : MAP_CONFIG.maxZoom }
+            );
+        };
+        
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [mapReady]);
     
     return [containerRef, mapRef, mapReady] as const;
 }

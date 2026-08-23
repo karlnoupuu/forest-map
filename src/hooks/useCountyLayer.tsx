@@ -148,13 +148,10 @@ export function useCountyLayer(
         if (!map) return;
 
         if (selectedCounty.id === DEFAULT_COUNTY.id) {
-            map.flyTo({ 
-                center  : MAP_CONFIG.center, 
-                zoom    : MAP_CONFIG.zoom,
-                duration: MAP_CONFIG.zoomAnimation.duration,
-                curve   : MAP_CONFIG.zoomAnimation.curve,
-                speed   : MAP_CONFIG.zoomAnimation.speed
-            });
+            map.fitBounds(
+                MAP_CONFIG.bounds as maplibregl.LngLatBoundsLike,
+                { padding : 20, maxZoom : MAP_CONFIG.maxZoom}
+            );
 
             return;
         }

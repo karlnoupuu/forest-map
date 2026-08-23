@@ -13,7 +13,7 @@ export function Icon(
     }) {
     return (
         <div 
-            className   = {`icon__wrapper--${size}`}
+            className   = {`icon__wrapper icon__wrapper--${size}`}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
         >

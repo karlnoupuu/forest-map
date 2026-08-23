@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -91,7 +97,7 @@ html, body, #root {
     flex-direction: column;
     flex-grow: 1;
 
-    cursor: default;
+    cursor: ns-resize;
     gap: 8px;
 
     z-index: 2;
@@ -229,7 +235,7 @@ html, body, #root {
 .header__icon {
     width: 24px;
     height: 24px;
-
+    cursor: pointer;
     color: var(--text-primary);
 }
 .header__icon:hover {
@@ -241,47 +247,13 @@ html, body, #root {
 .graph__content {
     padding: 8px;
 }
-
-
-
-/* Flipping characters */
-.flip-char {
-    display: inline-block;
-    overflow: hidden;
-    height: 1.2em;
-    line-height: 1.2em;
-    font-size: 24px;
-    font-weight: 550;
+.graph__content--empty {
+    padding: 8px;
 }
-.flip-char__inner {
-    display: block;
-    transition: transform 0.3s ease-out;
-    font-size: 24px;
-    font-weight: 550;
+.text--warning {
+    padding: 8px;
+    color: red;  
 }
-.flip-char__inner--rolling {
-    animation: roll 0.04s ease-in-out;
-}
-@keyframes roll {
-    0%  { opacity: 0; }
-    100%{ opacity: 1; }
-}
-
-
-.wrtext__wrapper {
-    position: relative;
-}
-.wrtext__span {
-    position: absolute;
-}
-.wrtext__span--new {
-    animation: reveal 0.15s ease-in-out;
-}
-@keyframes reveal {
-    0%      {clip-path: inset(0 100% 0 0);  }
-    100%    {clip-path: inset(0 0 0 0);     }
-}
-
 
 
 /* Tooltip */
@@ -296,7 +268,6 @@ html, body, #root {
   opacity: 1;
   padding: 4px 12px;
 }
-
 .tooltip__wrapper--closed {
   max-height: 0;
   opacity: 0;
@@ -308,12 +279,9 @@ html, body, #root {
 }
 
 
-
-
-
-
 /* ----- Icon related ----- */
 .icon__wrapper          {cursor: pointer;           }
+.icon__wrapper:hover    {color: green;            }
 .icon__wrapper--small   {width: 12px; height: 12px; }
 .icon__wrapper--medium  {width: 24px; height: 24px; }
 .icon__wrapper--large   {width: 36px; height: 36px; }

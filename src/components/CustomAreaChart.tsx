@@ -32,7 +32,7 @@ export default function CustomAreaChart( { data, xKey, areas } : AreaChartProps 
                     animationDuration={300}
                 />
             ))}
-            <Tooltip/>
+            <Tooltip formatter = {(value) => Number(value).toFixed(2)}/>
             <Legend/>
         </AreaChart>
     )

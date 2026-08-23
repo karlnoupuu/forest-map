@@ -128,18 +128,18 @@ html, body, #root {
 /* Page title */
 
 .title__wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+}
+.title__container {
     position: relative;
     display: flex;
-
-    width: 272px;
-    height: 32px;
-
-    flex-direction: row;
     align-items: center;
-
-    margin: 16px 16px 16px 32px;
-
-    gap: 8px;
+    justify-content: center;
+    width: 336px;
+    height: 64px;
 }
 .title__icon {
     width: 32px;

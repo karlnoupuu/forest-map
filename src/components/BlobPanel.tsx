@@ -11,11 +11,13 @@ export default function BlobPanel({timeScrubber } : { timeScrubber : React.React
                         </clipPath>
                     </defs>
                 </svg>
-                <div className = 'title__wrapper'>
-                    <Icon name = {'webappIcon'} size = {'large'} />
-                    <span className = 'title__span'>
-                        Metsaavastaja
-                    </span>
+                <div className = 'title__container'>
+                    <div className = 'title__wrapper'>
+                        <Icon name = {'webappIcon'} size = {'large'} />
+                        <span className = 'title__span'>
+                            Metsaavastaja
+                        </span>
+                    </div>
                 </div>
                 <div className = 'panel__timescrubber'>
                     {timeScrubber}

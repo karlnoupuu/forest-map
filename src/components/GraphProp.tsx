@@ -9,11 +9,13 @@ export interface GraphProp {
 }
 
 export interface GraphDef {
-    key     : string;
-    type    : string;
-    title   : string;
-    dataIdx : number;
-    xKey    : string;
-    convert : (data : any, year : number, county : string) => Record<string, string | number>[];
-    areas   : AreaChartArea[];
+    key         : string;
+    type        : string;
+    title       : string;
+    dataIdx     : number;
+    xKey        : string;
+    dataRange   : {min : number, max : number};
+    convert     : (data : any, year : number, county : string) => Record<string, string | number>[];
+    areas       : AreaChartArea[];
+    tooltip     : string;
 }

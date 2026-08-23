@@ -1,9 +1,11 @@
 import type { TimeScrubberProps } from "./TimeScrubberProps";
 import { useEffect, useRef } from "react";
 
-export default function TimeScrubber({ selectedYear, setSelectedYear, minYear, maxYear } : TimeScrubberProps) {
+import { TIME_SCRUBBER_RANGE } from "../config/general";
+
+export default function TimeScrubber({ selectedYear, setSelectedYear } : TimeScrubberProps) {
     const years = [];
-    for (let y = minYear; y <= maxYear; y++) {
+    for (let y = TIME_SCRUBBER_RANGE.min; y <= TIME_SCRUBBER_RANGE.max; y++) {
         years.push(y);
     }
 
@@ -32,9 +34,9 @@ export default function TimeScrubber({ selectedYear, setSelectedYear, minYear, m
 
     const handleScroll = (e : React.WheelEvent<HTMLDivElement>) => {
         if (e.deltaY > 0) {
-            setSelectedYear(Math.min(selectedYear + 1, maxYear));
+            setSelectedYear(Math.min(selectedYear + 1, TIME_SCRUBBER_RANGE.max));
         } else if (e.deltaY < 0) {
-            setSelectedYear(Math.max(selectedYear - 1, minYear));
+            setSelectedYear(Math.max(selectedYear - 1, TIME_SCRUBBER_RANGE.min));
         }
     }
 

@@ -32,3 +32,7 @@ export function convertDeforestation(data: DeforestData, year: number, county: s
       reforestation: counties[county].reforestation.totalForest / 1000,
     }));
 }
+
+export function clampYear(year : number, range : { min : number; max : number}) : number {
+  return Math.max(range.min, Math.min(range.max, year));
+}

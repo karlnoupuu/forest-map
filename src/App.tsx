@@ -9,10 +9,11 @@ import BlobPanel from './components/BlobPanel';
 import { useForestLayer } from './hooks/useForestLayer';
 
 export const DEFAULT_COUNTY = { id : '0000', name : 'Eesti'};
+export const DEFAULT_YEAR   = 2026;
 
 function App() {
   const [selectedCounty, setSelectedCounty] = useState<{ id : string, name : string}>(DEFAULT_COUNTY);
-  const [selectedYear, setSelectedYear]     = useState<number>(2015);
+  const [selectedYear, setSelectedYear]     = useState<number>(DEFAULT_YEAR);
   const [containerRef, mapRef, mapReady]    = useMap();
 
   useCountyLayer(containerRef, mapRef, selectedCounty, setSelectedCounty);
@@ -36,7 +37,7 @@ function App() {
   return(
     <main className = "app">
       <BlobPanel
-        timeScrubber = {<TimeScrubber selectedYear = {selectedYear} setSelectedYear = {setSelectedYear} minYear = {1950} maxYear = {2025}/>}
+        timeScrubber = {<TimeScrubber selectedYear = {selectedYear} setSelectedYear = {setSelectedYear}/>}
       />
       <div className = "map-container" ref = {containerRef}>
       </div>

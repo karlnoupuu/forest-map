@@ -1,18 +1,20 @@
 import type { GraphProp } from "./GraphProp";
 import CustomAreaChart from "./CustomAreaChart";
-import StackedBarChart from "./StackedBarChart";
+import CustomStackedBarChart from "./CustomStackedBarChart";
 import { useState, useMemo } from "react";
 import Tooltip from "./Tooltip";
+import { clampYear } from "../converters";
 
 import { Icon } from "./Icon";
 import type { ReactNode } from "react";
 
 export function Graph({ config, selectedCounty, selectedYear, data } : GraphProp) {
     const [showTooltip, setShowTooltip] = useState(false);
-    const tooltipMessage : string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
+    const inRange = selectedYear >= config.dataRange.min && selectedYear <= config.dataRange.max;
+    const effectiveYear = clampYear(selectedYear, config.dataRange);
 
     const chartData = useMemo(
-        () => data ? config.convert(data, selectedYear, selectedCounty) : [],
+        () => data ? config.convert(data, effectiveYear, selectedCounty) : [],
         [data, selectedYear, selectedCounty]
     )
 
@@ -20,18 +22,21 @@ export function Graph({ config, selectedCounty, selectedYear, data } : GraphProp
 
     const CHARTS: Record<string, ReactNode> = {
         areaChart       :   <CustomAreaChart data = {chartData} xKey = {config.xKey} areas = {config.areas} />,
-        stackedBarChart :   <StackedBarChart data = {chartData} xKey = {config.xKey} areas  = {config.areas} />,
+        stackedBarChart :   <CustomStackedBarChart data = {chartData} xKey = {config.xKey} areas  = {config.areas} />,
     }
 
     return (
         <section className = 'graph__wrapper'>
             <header className = 'graph__header'>
                 <span className = 'graph__title text--normal text--bold'>{config.title}</span>
-                <Icon name = {'questionMarkCircle'} size = {'medium'} onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}/>
+                {inRange ? <Icon name = {'questionMarkCircle'} size = {'medium'} onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}/> : ''}
             </header>
-            <Tooltip text = {tooltipMessage} visible = {showTooltip}/>
+            <Tooltip text = {config.tooltip} visible = {showTooltip}/>
             <div className = 'graph__content'>
-                {CHARTS[config.type]}
+                {inRange 
+                    ? CHARTS[config.type]
+                    : <span className = 'graph__content--empty text--small text--warning'>Andmed puuduvad valitud aasta jaoks.</span>
+                }
             </div>
         </section>
     )

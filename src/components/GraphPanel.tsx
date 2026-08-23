@@ -18,9 +18,9 @@ export default function GraphPanel(
     }, [selectedCounty]);
 
     const reshapeName = (name : string | undefined) : string => {
-        if (name === undefined)   return 'Eesti';
-        else if (name)          return `${name.split(" ")[0]}maa`;
-        else                    return '';
+        if (name === undefined || name === 'Eesti')     return 'Eesti';
+        else if (name !== 'Eesti')                      return `${name.split(" ")[0]}maa`;
+        else                                            return '';
     }
 
     return (

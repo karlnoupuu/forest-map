@@ -9,7 +9,7 @@ import { TOOLS_CONFIG } from "../config/toolbar";
 export default function GraphPanel(
     {graphData, selectedCounty, selectedYear } : GraphPanelProps
 ) {
-    const [stats, setStats]             = useState({ landArea : 0, forestArea : 0, percentage : 0})
+    const [stats, _setStats]             = useState({ landArea : 0, forestArea : 0, percentage : 0})
     const [countyName, setCountyName]   = useState<string>('');
 
     useEffect(() => {

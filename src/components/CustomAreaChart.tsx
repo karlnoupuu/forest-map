@@ -1,13 +1,6 @@
 import { AreaChart, CartesianGrid, XAxis, YAxis, Area, Legend, Tooltip } from "recharts";
 import type { AreaChartProps } from "./ChartProp";
 
-
-const COLORS = {
-  stateForest: '#1a4301',   // darkest — deep forest floor
-  privateForest: '#4c7a34', // mid — sunlit canopy
-  totalForest: '#8db360',   // lightest — spring foliage
-};
-
 export default function CustomAreaChart( { data, xKey, areas } : AreaChartProps ){
     if (!data) return null;
 

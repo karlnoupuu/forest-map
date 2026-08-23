@@ -7,7 +7,7 @@ export interface ChartProp {
 }
 
 export interface AreaChartProps {
-    data            : Record<string, number>[];
+    data            : Record<string, number | string>[];
     xKey            : string;
     areas           : AreaChartArea[];
 }

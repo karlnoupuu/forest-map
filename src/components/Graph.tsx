@@ -3,8 +3,6 @@ import CustomAreaChart from "./CustomAreaChart";
 import StackedBarChart from "./StackedBarChart";
 import { useState, useMemo } from "react";
 import Tooltip from "./Tooltip";
-import type { ForestryData, DeforestData, DeforestAreaByYear } from "../types/ForestryData";
-
 
 import { Icon } from "./Icon";
 import type { ReactNode } from "react";

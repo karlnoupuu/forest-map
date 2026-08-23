@@ -1,4 +1,4 @@
-import { CartesianGrid, Legend, Line, LineChart, XAxis, YAxis} from 'recharts';
+import { CartesianGrid, Line, LineChart, XAxis, YAxis} from 'recharts';
 
 const data: Array<{}> = generateMockData(2000, 2015);
 

@@ -1,6 +1,6 @@
 import * as maplibregl from 'maplibre-gl';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { MAP_CONFIG } from '../config/map';
 
 export function useForestLayer(

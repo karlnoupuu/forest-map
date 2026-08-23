@@ -14,6 +14,6 @@ export interface GraphDef {
     title   : string;
     dataIdx : number;
     xKey    : string;
-    convert : (data : any, year : number, county : string) => Record<string, number>[];
+    convert : (data : any, year : number, county : string) => Record<string, string | number>[];
     areas   : AreaChartArea[];
 }

@@ -20,7 +20,7 @@ function App() {
 
   const forestryData = useRef<ForestryData | null>(null);
   const deforestData = useRef<DeforestData | null>(null);
-  const [dataLoaded, setDataLoaded] = useState(false);
+  const [_dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
     Promise.all([

@@ -1,4 +1,4 @@
-import type { ImageSourceSpecification, Source, SourceSpecification } from "maplibre-gl";
+import type { ImageSourceSpecification, SourceSpecification } from "maplibre-gl";
 
 export const MAP_CONFIG = {
     center: [24.75, 58.6] as [number, number],

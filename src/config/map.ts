@@ -2,7 +2,8 @@ import type { ImageSourceSpecification, SourceSpecification } from "maplibre-gl"
 
 export const MAP_CONFIG = {
     center: [24.75, 58.6] as [number, number],
-    iniZoom : 1 as number,
+    iniCenter: [25.19, 54.54] as [number, number],
+    iniZoom : 2 as number,
     maxZoom : 7 as number,
     dragPan: false,
     keyboard: false,

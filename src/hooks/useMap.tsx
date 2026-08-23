@@ -30,6 +30,7 @@ export function useMap() {
                     MAP_CONFIG.layers.basemap
                 ]
             },
+            center      : MAP_CONFIG.iniCenter,
             zoom        : MAP_CONFIG.iniZoom,
             dragPan     : MAP_CONFIG.dragPan,
             keyboard    : MAP_CONFIG.keyboard,

@@ -77,9 +77,9 @@ export const MAP_CONFIG = {
                 'fill-extrusion-rounded-corner-distance' : 2,
             },
             paint   : {
-                'fill-extrusion-color'  : '#3b82f6',
+                'fill-extrusion-color'  : '#4c7a34',
                 'fill-extrusion-height' : 10000,
-                'fill-extrusion-opacity': 0.65
+                'fill-extrusion-opacity': 0.5
             }
         },
         countyDim   : {

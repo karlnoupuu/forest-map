@@ -18,6 +18,7 @@ export default function CustomStackedBarChart( { data, xKey, areas } : AreaChart
                 {areas.map(area => (
                     <Bar
                         key     =   {area.dataKey}
+                        radius  =   {[5, 5, 5, 5]}
                         dataKey =   {area.dataKey}
                         name    =   {area.label}
                         stackId =   {'a'}

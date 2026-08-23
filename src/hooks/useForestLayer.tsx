@@ -22,10 +22,9 @@ export function useForestLayer(
     const forestLayerSourceId = MAP_CONFIG.sources.forest.id;
     const map       = mapRef.current;
 
-
-    const layers : maplibregl.AddLayerObject[] = [
-        MAP_CONFIG.layers.forest,
-    ] as maplibregl.AddLayerObject[];
+    const FOREST_SOURCES    = ['forestSourceA', 'forestSourceB'];
+    const FOREST_LAYERS     = ['forestLayerA', 'forestLayerB'];
+    const activeIdx = useRef(0);
 
     /* ----- Forest layer setup ----- */
     useEffect(() => {
@@ -34,13 +33,27 @@ export function useForestLayer(
         const addLayer = () => {
             if (map.getSource(forestLayerSourceId)) return;
 
-            map.addSource(forestLayerSourceId, {
-                type        : MAP_CONFIG.sources.forest.data.type,
-                url         : MAP_CONFIG.sources.forest.getUrl(selectedYear),
-                coordinates : FOREST_COORDS,
-            });
+            ['A', 'B'].forEach((_, i) => {
+                map.addSource(FOREST_SOURCES[i], 
+                    {
+                        type: 'image',
+                        url: MAP_CONFIG.sources.forest.getUrl(selectedYear),
+                        coordinates: FOREST_COORDS,
+                    } as maplibregl.ImageSourceSpecification
+                );
 
-            map.addLayer(layers[0])
+                map.addLayer(
+                    {
+                        id: FOREST_LAYERS[i],
+                        type: 'raster',
+                        source: FOREST_SOURCES[i],
+                        paint: {
+                        'raster-opacity': i === 0 ? 1 : 0,
+                        'raster-opacity-transition' : { duration : 0 }
+                        },
+                    } as maplibregl.AddLayerObject
+                );
+            });
         }
 
         if (map.isStyleLoaded()) {
@@ -51,8 +64,11 @@ export function useForestLayer(
 
         return () => {
             map.off('style.load', addLayer);
-            if (map.getLayer(MAP_CONFIG.layers.forest.id)) map.removeLayer(MAP_CONFIG.layers.forest.id);
-            if (map.getSource(forestLayerSourceId)) map.removeSource(forestLayerSourceId);
+
+            ['A', 'B'].forEach((_, i) => {
+                if (map.getLayer(FOREST_LAYERS[i]))    map.removeLayer(FOREST_LAYERS[i]);
+                if (map.getSource(FOREST_SOURCES[i]))   map.removeSource(FOREST_SOURCES[i])
+            })
         };
     }, [mapReady]);
 
@@ -63,22 +79,22 @@ export function useForestLayer(
         if (!map || !mapReady) return;
 
         const clampedYear = clampYear(selectedYear, DATA_YEAR_RANGES.forestLayer);
-        
         if (clampedYear === effectiveYear.current) return;
         effectiveYear.current = clampedYear;
 
-        const source = map.getSource(forestLayerSourceId) as maplibregl.ImageSource;
-        if (!source) return;
+        const currLyr = FOREST_LAYERS[activeIdx.current];
+        const nextIdx = activeIdx.current === 0 ? 1 : 0;
+        const nextSrc = FOREST_SOURCES[nextIdx];
+        const nextLyr = FOREST_LAYERS[nextIdx];
+
+        const source = map.getSource(nextSrc) as maplibregl.ImageSource;
+        source.updateImage({ url : MAP_CONFIG.sources.forest.getUrl(effectiveYear.current)});
         
-        map.setPaintProperty(MAP_CONFIG.layers.forest.id, 'raster-opacity', 0);
-
-        setTimeout(() => {
-            source.updateImage({ url : MAP_CONFIG.sources.forest.getUrl(effectiveYear.current)});
-
-            map.once('idle', () => {
-                map.setPaintProperty(MAP_CONFIG.layers.forest.id, 'raster-opacity', 1);
-            });
-        }, 100);
+        map.once('idle', () => {
+            map.setPaintProperty(nextLyr, 'raster-opacity', 1);
+            map.setPaintProperty(currLyr, 'raster-opacity', 0);
+            activeIdx.current = nextIdx;
+        });
     }, [selectedYear, mapReady]);
 }
 

@@ -98,7 +98,7 @@ export const MAP_CONFIG = {
             source  : 'forestLayerSource',
             paint   : {
                 'raster-opacity' : 1,
-                'raster-opacity-transition' : { duration : 100 }
+                'raster-opacity-transition' : { duration : 0 }
             },
         }
     }

@@ -3,6 +3,10 @@ import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 import { MAP_CONFIG } from "../config/map";
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
+
+
+
 
 export function useMap() {
     const containerRef  = useRef<HTMLDivElement | null>(null);
@@ -10,6 +14,8 @@ export function useMap() {
     const [mapReady, setMapReady]   = useState(false);
 
     useEffect(() => {
+        maplibregl.setWorkerUrl(workerUrl);
+        
         if (!containerRef.current) return;
 
         const map = new maplibregl.Map({

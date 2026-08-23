@@ -19,13 +19,11 @@ export default function CustomStackedBarChart( { data, xKey, areas } : AreaChart
                     <Bar
                         key     =   {area.dataKey}
                         dataKey =   {area.dataKey}
+                        name    =   {area.label}
                         stackId =   {'a'}
-                        fill    =   '#1a4301'
+                        fill    =   {area.color}
                     />
                 ))}
-
-                <Bar dataKey = 'stateForest' stackId = 'a' fill='#1a4301'/>
-                <Bar dataKey = 'privateForest' stackId = 'a' fill = '#4c7a34'/>
             </BarChart>
         </ResponsiveContainer>
     )

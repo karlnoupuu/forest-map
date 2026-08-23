@@ -1,4 +1,4 @@
-import type { SourceSpecification } from "maplibre-gl";
+import type { ImageSourceSpecification, Source, SourceSpecification } from "maplibre-gl";
 
 export const MAP_CONFIG = {
     center: [24.75, 58.6] as [number, number],
@@ -32,6 +32,16 @@ export const MAP_CONFIG = {
                 data    : '/data/county-lines.geojson',
                 promoteId: 'MKOOD',
             } as SourceSpecification
+        },
+        forest  : {
+            id      : 'forestLayerSource',
+            path    : '/data/forest-rasters',
+            getUrl  : (year : number) => `/data/forest-rasters-downscaled/forest-raster-${year}.webp`,
+            data    : {
+                type        : 'image',
+                url         : '',
+                coordinates : [[0,0],[0,0],[0,0],[0,0]],
+            } as ImageSourceSpecification
         }
     },
     layers : {
@@ -79,6 +89,15 @@ export const MAP_CONFIG = {
                 'fill-opacity': 0,
                 'fill-opacity-transition': { duration : 300}
             }
+        },
+        forest      : {
+            id      : 'forest',
+            type    : 'raster',
+            source  : 'forestLayerSource',
+            paint   : {
+                'raster-opacity' : 1,
+                'raster-opacity-transition' : { duration : 100 }
+            },
         }
     }
 }

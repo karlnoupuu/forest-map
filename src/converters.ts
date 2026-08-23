@@ -24,8 +24,6 @@ export function convertTreeComposition(data: ForestryData, year: number, county:
 }
 
 export function convertDeforestation(data: DeforestData, year: number, county: string) {
-    console.log(data, year, county);
-  
     return Object.entries(data)
     .filter(([y]) => Number(y) >= year - 4 && Number(y) < year + 4)
     .map(([y, counties]) => ({

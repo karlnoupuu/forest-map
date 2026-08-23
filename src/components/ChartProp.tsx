@@ -15,4 +15,5 @@ export interface AreaChartProps {
 export interface AreaChartArea {
     dataKey : string;
     label   : string;
+    color   : string;
 }

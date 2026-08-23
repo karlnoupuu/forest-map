@@ -14,20 +14,13 @@ export default function CustomAreaChart( { data, xKey, areas } : AreaChartProps 
     return (
         <AreaChart style = {{ width : '100%', maxWidth : '800px', margin : 'auto', aspectRatio : 1.618}} responsive data = {data}>
             <defs>
-                <linearGradient id="stateForest" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={COLORS.stateForest} stopOpacity={0.8} />
-                    <stop offset="95%" stopColor={COLORS.stateForest} stopOpacity={0} />
-                </linearGradient>
-                <linearGradient id="privateForest" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={COLORS.privateForest} stopOpacity={0.8} />
-                    <stop offset="95%" stopColor={COLORS.privateForest} stopOpacity={0} />
-                </linearGradient>
-                <linearGradient id="totalForest" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={COLORS.totalForest}stopOpacity={0.8} />
-                    <stop offset="95%" stopColor={COLORS.totalForest} stopOpacity={0} />
-                </linearGradient>
+                {areas.map(area => (
+                    <linearGradient id = {area.dataKey} x1 = '0' y1 = '0' x2 = '0' y2 = '1'>
+                        <stop offset="0%"   stopColor={area.color} stopOpacity={0.8} />
+                        <stop offset="95%"  stopColor={area.color} stopOpacity={0} />
+                    </linearGradient>
+                ))}
             </defs>
-
             <CartesianGrid />
             <XAxis dataKey = {xKey} style = {{fontSize : '12px', color    : 'black'}}/>
             <YAxis width = {32} style = {{fontSize : '12px', color    : 'black'}}/>
@@ -35,11 +28,12 @@ export default function CustomAreaChart( { data, xKey, areas } : AreaChartProps 
                 <Area
                     key = {area.dataKey}
                     dataKey = {area.dataKey}
+                    name = {area.label}
             
                     type = 'monotone'
-                    stroke = {COLORS.privateForest}
+                    stroke = {area.color}
                     fillOpacity = {1}
-                    fill = "url(#privateForest)"
+                    fill = {`url(#${area.dataKey})`}
                     isAnimationActive = {true}
                     animationBegin={0}
                     animationDuration={300}

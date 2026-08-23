@@ -6,15 +6,17 @@ import TimeScrubber from './components/TimeScrubber';
 import GraphPanel from './components/GraphPanel';
 import type { ForestryData, DeforestData } from './types/ForestryData';
 import BlobPanel from './components/BlobPanel';
+import { useForestLayer } from './hooks/useForestLayer';
 
 export const DEFAULT_COUNTY = { id : '0000', name : 'Eesti'};
 
 function App() {
   const [selectedCounty, setSelectedCounty] = useState<{ id : string, name : string}>(DEFAULT_COUNTY);
-  const [selectedYear, setSelectedYear] = useState<number>(2015);
-  const [containerRef, mapRef]        = useMap();
+  const [selectedYear, setSelectedYear]     = useState<number>(2015);
+  const [containerRef, mapRef, mapReady]    = useMap();
 
   useCountyLayer(containerRef, mapRef, selectedCounty, setSelectedCounty);
+  useForestLayer(mapRef, mapReady, selectedYear);
 
   const forestryData = useRef<ForestryData | null>(null);
   const deforestData = useRef<DeforestData | null>(null);

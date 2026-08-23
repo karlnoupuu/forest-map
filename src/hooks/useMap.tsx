@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
@@ -7,6 +7,7 @@ import { MAP_CONFIG } from "../config/map";
 export function useMap() {
     const containerRef  = useRef<HTMLDivElement | null>(null);
     const mapRef        = useRef<maplibregl.Map | null>(null);
+    const [mapReady, setMapReady]   = useState(false);
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -32,11 +33,12 @@ export function useMap() {
         });
 
         mapRef.current = map;
+        map.on('load', () => setMapReady(true));
 
         return () => {
             map.remove();
         }
     }, []);
     
-    return [containerRef, mapRef] as const;
+    return [containerRef, mapRef, mapReady] as const;
 }

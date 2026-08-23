@@ -14,6 +14,7 @@ dist-ssr
 
 .venv
 public/data/Maakonnad.csv
+public/data/forest-rasters
 public/scripts
 
 # Editor directories and files

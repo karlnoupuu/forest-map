@@ -28,3 +28,29 @@ export interface AreaByYear {
   privateForest: number;
   totalForest: number;
 }
+
+export interface DeforestAreaByYear {
+    year            : number;
+    reforestation   : number;
+    deforestation   : number;
+}
+
+
+export interface DeforestData {
+    [year : string] : {
+        [mkood : string] : DeforestCountyData
+    }
+}
+export interface DeforestCountyData {
+    deforestation : DeforestationData;
+    reforestation : ReforestationData;
+}
+export interface DeforestationData {
+    stateForest     : number;
+    privateForest   : number;
+    totalForest     : number;
+    otherFOrest     : number;
+}
+export interface ReforestationData {
+    totalForest     : number;
+}

@@ -10,9 +10,9 @@ export const GRAPH_CONFIG : GraphDef[] = [
         xKey    : 'year',
         convert : convertLandArea,
         areas   : [
-            { dataKey : 'stateForest',  label : 'Riigimets',},
-            { dataKey : 'privateForest',label : 'Eramets',  },
-            { dataKey : 'totalForest',  label : 'Kokku',    },
+            { dataKey : 'totalForest',  label : 'Kokku',        color : '#8db360'},
+            { dataKey : 'stateForest',  label : 'Riigimets',    color : '#4c7a34'},
+            { dataKey : 'privateForest',label : 'Eramets',      color : '#1a4301'},
         ]
     },
     { 
@@ -23,14 +23,20 @@ export const GRAPH_CONFIG : GraphDef[] = [
         xKey    : 'species',
         convert : convertTreeComposition,
         areas   : [
-            { dataKey : 'privateForest', label : 'Eramets',    },
-            { dataKey : 'stateForest',   label : 'Riigimets', },
+            { dataKey : 'privateForest', label : 'Eramets',     color : '#1a4301' },
+            { dataKey : 'stateForest',   label : 'Riigimets',   color : '#4c7a34' },
         ]
     },
-    // { 
-    //     key     : 'forestDeforestation',
-    //     type    : 'areaChart', 
-    //     title   : "Metsaraie ja uuendus (tuhat ha)",
-    //     dataIdx : 0,
-    // },
+    { 
+        key     : 'forestDeforestation',
+        type    : 'areaChart', 
+        title   : "Metsaraie ja uuendus (tuhat ha)",
+        dataIdx : 1,
+        xKey    : 'year',
+        convert : convertDeforestation,
+        areas : [
+            { dataKey : 'deforestation', label : 'Metsaraie',   color : '#912813'},
+            { dataKey : 'reforestation', label : 'Metsauuendus',color : '#1a4301'},
+        ]
+    },
 ];

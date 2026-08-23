@@ -59,15 +59,15 @@ function PanelHeader({ countyName, stats} : PanelHeaderProps) {
     return (
         <header className = 'graph-panel__header'>
                 <span className = 'graph-panel__header-title text--large text--bold'>{countyName}</span>
-                <div className = 'graph-panel__header-span-wrapper'>
+                <div className = 'graph-panel__header-span-wrapper' style = {{display : 'none'}}>
                     <span className = 'graph-panel__header-span text--small'>Pindala:</span>
                     <span className = 'graph-panel__header-span graph-panel__header-value text--small'>{stats.landArea}km²</span>
                 </div>
-                <div className = 'graph-panel__header-span-wrapper'>
+                <div className = 'graph-panel__header-span-wrapper' style = {{display : 'none'}}>
                     <span className = 'graph-panel__header-span text--small'>Metsa pindala:</span>
                     <span className = 'graph-panel__header-span graph-panel__header-value text--small'>{stats.forestArea}km²</span>
                 </div>
-                <div className = 'graph-panel__header-span-wrapper'>
+                <div className = 'graph-panel__header-span-wrapper' style = {{display : 'none'}}>
                     <span className = 'graph-panel__header-span text--small'>Metsaprotsent:</span>
                     <span className = 'graph-panel__header-span graph-panel__header-value text--small'>{stats.percentage}%</span>
                 </div>
@@ -84,7 +84,7 @@ interface PanelToolbarProp {
 
 function PanelToolbar({ tools } : { tools : PanelToolbarProp[] }) {
     return (
-        <div className = 'toolbar__wrapper'>
+        <div className = 'toolbar__wrapper' style = {{display : "none"}}>
             {tools.map(tool => (
                 <Icon key = {tool.name} name = {tool.name} size = {tool.size}/>
             ))}

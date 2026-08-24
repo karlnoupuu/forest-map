@@ -1,75 +1,44 @@
-# React + TypeScript + Vite
+# ![alt text][heroicon] Metsaavastaja
+An interactive map and dashboard combination of Estonia's forests, aimed at bringing fragmented public forestry data to the common user in a pleasing and easily digestible way. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![alt text][heroimg]
+[heroimg]: https://github.com/karlnoupuu/forest-map/raw/main/public/heroimg.png
+[heroicon]: https://github.com/karlnoupuu/forest-map/raw/main/public/heroicon.svg
 
-Currently, two official plugins are available:
+[You can check it out and click around here!](https://forest-map.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Origins
+The origins of this project go back to a hackathon, "Metsikult andmetes 2026", organised by the Estonian Environmental Agency. The idea and solution used for this application is similar to what was
+achieved by me and my team.
 
-## React Compiler
+[You can check out the hackathon repository here!](https://github.com/Natashik777/Metsaavastaja)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The current application is a solo rewrite and extension of the original solution.
 
-## Expanding the ESLint configuration
+## Tech stack
+This webapp is built as a Vite project using the React framework with TypeScript.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+It is mainly meant as a front-end project, thus the data for the webapp is static and served
+locally from the projects /public directory.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Notable libraries include maplibregl for the interactive map and Recharts for the graph components.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Features
+The main eye-catcher of the webapp is the full-page interactive map of Estonia with overlaid
+county borders. The map supports county selection, providing a hard-to-miss hover state to indicate selection, zoom-to-bounds, and a dimming overlay.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The accompanying graph panel is composed of custom graph components that update reactively based on the
+selected year and county. The graph system is config-driven so adding new visualisations means adding a definition object rather than writing new components.
 
-```
+## Setup
+Requires **Node.js v20.19+** and **npm**.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+As this is a React + TypeScript + Vite project, getting a running version of it on your own machine is
+as simple as:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+  git clone https://github.com/karlnoupuu/forest-map.git
+  cd forest-map
+  npm install
+  npm run dev
 ```

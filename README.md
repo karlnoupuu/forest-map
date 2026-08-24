@@ -1,9 +1,7 @@
-# ![alt text][heroicon] Metsaavastaja
+# ![alt text](https://github.com/karlnoupuu/forest-map/raw/main/public/favicon.svg) Metsaavastaja
 An interactive map and dashboard combination of Estonia's forests, aimed at bringing fragmented public forestry data to the common user in a pleasing and easily digestible way. 
 
-![alt text][heroimg]
-[heroimg]: https://github.com/karlnoupuu/forest-map/raw/main/public/heroimg.png
-[heroicon]: https://github.com/karlnoupuu/forest-map/raw/main/public/heroicon.svg
+![alt text](https://github.com/karlnoupuu/forest-map/raw/main/public/heroimg.png)
 
 [You can check it out and click around here!](https://forest-map.vercel.app/)
 

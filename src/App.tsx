@@ -7,6 +7,7 @@ import GraphPanel from './components/GraphPanel';
 import type { ForestryData, DeforestData } from './types/ForestryData';
 import BlobPanel from './components/BlobPanel';
 import { useForestLayer } from './hooks/useForestLayer';
+import InfoModal from './components/InfoModal';
 
 export const DEFAULT_COUNTY = { id : '0000', name : 'Eesti'};
 export const DEFAULT_YEAR   = 2026;
@@ -14,7 +15,15 @@ export const DEFAULT_YEAR   = 2026;
 function App() {
   const [selectedCounty, setSelectedCounty] = useState<{ id : string, name : string}>(DEFAULT_COUNTY);
   const [selectedYear, setSelectedYear]     = useState<number>(DEFAULT_YEAR);
+  const [mobileConfirmed, setMobileConfirmed] = useState<boolean>(localStorage.getItem('mobileConfirmed') === 'true');
   const [containerRef, mapRef, mapReady]    = useMap();
+
+  const isMobile = ('ontouchstart' in window || navigator.maxTouchPoints > 0) && window.innerWidth < 768;
+  
+  const dismissModal = () => {
+    setMobileConfirmed(true);
+    localStorage.setItem('mobileConfirmed', 'true');
+  };
 
   useCountyLayer(containerRef, mapRef, selectedCounty, setSelectedCounty);
   useForestLayer(mapRef, mapReady, selectedYear);
@@ -36,6 +45,13 @@ function App() {
 
   return(
     <main className = "app">
+      {!mobileConfirmed && isMobile && (
+        <InfoModal
+          infoText      = {'This webapp is optimised for browser use. \nFor the best user experience please switch to a desktop browser.'}
+          mobileConfirm = {mobileConfirmed}
+          onDismiss     = {dismissModal}
+        />
+      )}
       <BlobPanel
         timeScrubber = {<TimeScrubber selectedYear = {selectedYear} setSelectedYear = {setSelectedYear}/>}
       />

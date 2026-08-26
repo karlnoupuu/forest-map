@@ -9,9 +9,9 @@ export const TOOLS_CONFIG = [
         name    : 'questionMarkCircle',
         size    : 'large',
     },
-    {
-        content : 'settings',
-        name    : 'adjustmentsHorizontal',
-        size    : 'large',
-    }
+    // {
+    //     content : 'settings',
+    //     name    : 'adjustmentsHorizontal',
+    //     size    : 'large',
+    // }
 ]

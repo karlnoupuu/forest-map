@@ -1,14 +1,17 @@
 export const TOOLS_CONFIG = [
     {
-        name : 'chartBarSquare',
-        size : 'large',
+        content : 'graphs',
+        name    : 'chartBarSquare',
+        size    : 'large',
     },
     {
-        name : 'questionMarkCircle',
-        size : 'large',
+        content : 'information',
+        name    : 'questionMarkCircle',
+        size    : 'large',
     },
     {
-        name : 'adjustmentsHorizontal',
-        size : 'large',
+        content : 'settings',
+        name    : 'adjustmentsHorizontal',
+        size    : 'large',
     }
 ]

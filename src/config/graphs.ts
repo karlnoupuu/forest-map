@@ -1,5 +1,5 @@
 import { convertLandArea, convertTreeComposition, convertDeforestation } from "../converters";
-import type { GraphDef } from "../components/GraphProp";
+import type { GraphDef } from "../components/side-panel/GraphProp";
 import { DATA_YEAR_RANGES } from "./general";
 
 export const GRAPH_CONFIG : GraphDef[] = [

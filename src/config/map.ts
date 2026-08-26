@@ -18,11 +18,20 @@ export const MAP_CONFIG = {
     },
     bounds  :[[21.5, 57.5], [28.2, 59.7]],
     sources : {
-        basemap : {
+        basemapLight : {
             id      : 'cartoBaseMap',
             data    : {
                 type    : 'raster',
                 tiles   : ['https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom : 8,
+            } as SourceSpecification
+        },
+        basemapDark : {
+            id      : 'cartoBaseMap',
+            data    : {
+                type    : 'raster',
+                tiles   : ['https://a.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom : 8,
             } as SourceSpecification

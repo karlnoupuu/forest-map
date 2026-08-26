@@ -1,4 +1,4 @@
-import type { ForestryData, DeforestData } from '../types/ForestryData';
+import type { ForestryData, DeforestData } from '../../types/ForestryData';
 
 export interface GraphPanelProps {
     graphData : (ForestryData | DeforestData | null)[];

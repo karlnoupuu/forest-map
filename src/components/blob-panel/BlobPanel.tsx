@@ -1,4 +1,4 @@
-import { Icon } from "./Icon";
+import { Icon } from "../common/Icon";
 
 export default function BlobPanel({timeScrubber } : { timeScrubber : React.ReactNode}) {    
     return (

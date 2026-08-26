@@ -1,11 +1,11 @@
 import type { GraphProp } from "./GraphProp";
-import CustomAreaChart from "./CustomAreaChart";
-import CustomStackedBarChart from "./CustomStackedBarChart";
+import CustomAreaChart from "./charts/CustomAreaChart";
+import CustomStackedBarChart from "./charts/CustomStackedBarChart";
 import { useState, useMemo } from "react";
-import Tooltip from "./Tooltip";
-import { clampYear } from "../converters";
+import Tooltip from "../common/Tooltip";
+import { clampYear } from "../../converters";
 
-import { Icon } from "./Icon";
+import { Icon } from "../common/Icon";
 import type { ReactNode } from "react";
 
 export function Graph({ config, selectedCounty, selectedYear, data } : GraphProp) {

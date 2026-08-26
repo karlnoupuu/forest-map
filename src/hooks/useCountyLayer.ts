@@ -51,30 +51,40 @@ export function useCountyLayer(
 
             addEvents();
         };
-
-
-
+        
         /* ===== Mouse event handlers ===== */
         const handleClick = (e : maplibregl.MapLayerMouseEvent) => {
             if (e.features && e.features.length > 0) {
                 let id = e.features[0].properties.MKOOD;
 
+                if (hoveredId) {
+                    map.setFeatureState({ source : countyLinesSourceId, id : hoveredId}, { hover : false});
+                    map.setFilter(countyFillHoverLayerId, ['==', 'MKOOD', '']);
+                    hoveredId = '';
+                }
+
                 if (selectedRef.current?.id === id) setSelectedCounty(DEFAULT_COUNTY);
-                else                                setSelectedCounty({ id : id, name : e.features[0].properties.MNIMI});
+                else                                setSelectedCounty({ id : id, name : e.features[0].properties.MNIMI})
             }
         };
 
         let hoveredId: string = '';
         const handleHover = (e : maplibregl.MapLayerMouseEvent) => {
+            // If MapLayerMouseEvent has features
             if (e.features && e.features.length > 0) {
+                // Get feature id
                 const id = e.features[0].properties.MKOOD;
+
+                // If mouse event hover matches the currently hovered county, early return
                 if (id === hoveredId) return;
 
+                // If hovered id does not match currenty hovered county, clear previous hover
                 if (hoveredId) {
                     map.setFeatureState({ source : countyLinesSourceId, id : hoveredId}, {hover : false});
                     map.setFilter(countyFillHoverLayerId, ['==', 'MKOOD', '']);
                 }
 
+                // If hovered county id matched currently selected county id, disable hover
                 if (id === selectedRef.current?.id) {
                     hoveredId = '';
                     return;
@@ -207,8 +217,9 @@ export function useCountyLayer(
     /* ===== Out of focus county dimming =====*/
     useEffect(() => {
         const map = mapRef.current;
-        if (!map || !map.isStyleLoaded()) return;
+        if (!map || !map.getLayer(countyDimLayerId)) return;
 
+  
         if (selectedCounty.id !== DEFAULT_COUNTY.id) {
             map.setFilter(countyDimLayerId, ['!=', 'MKOOD', selectedCounty.id]);
             map.setPaintProperty(countyDimLayerId, 'fill-opacity', 1);

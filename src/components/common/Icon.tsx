@@ -1,4 +1,4 @@
-import { ICONS } from "../config/icons"
+import { ICONS } from "../../config/icons"
 
 export function Icon(
     { name, 

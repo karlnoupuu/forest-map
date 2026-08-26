@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import type { GraphPanelProps } from "./GraphPanelProps";
 import { Graph } from "./Graph";
 
-import { Icon } from "./Icon";
-import { GRAPH_CONFIG } from "../config/graphs";
-import { TOOLS_CONFIG } from "../config/toolbar";
+import { GRAPH_CONFIG } from "../../config/graphs";
 
 export default function GraphPanel(
     {graphData, selectedCounty, selectedYear } : GraphPanelProps
@@ -24,22 +22,23 @@ export default function GraphPanel(
     }
 
     return (
-        <section className = 'graph-panel__section'>
-            <PanelToolbar tools = {TOOLS_CONFIG} />
+        <section className = 'side-panel__content'>
             <PanelHeader
                 countyName  = {countyName}
                 stats       = {stats}
             /> 
-            <div className = 'graph-panel__content'>
-                {GRAPH_CONFIG.map(def => (
-                    <Graph
-                        key             = {def.key}
-                        config          = {def}
-                        selectedCounty  = {selectedCounty.id}
-                        selectedYear    = {selectedYear}
-                        data            = {graphData[def.dataIdx]}
-                    />
-                ))}
+            <div className = 'graph-panel__wrapper'>
+                <div className = 'graph-panel__content'>
+                    {GRAPH_CONFIG.map(def => (
+                        <Graph
+                            key             = {def.key}
+                            config          = {def}
+                            selectedCounty  = {selectedCounty.id}
+                            selectedYear    = {selectedYear}
+                            data            = {graphData[def.dataIdx]}
+                        />
+                    ))}
+                </div>
             </div>
         </section>
     )
@@ -57,7 +56,7 @@ interface PanelHeaderProps {
 
 function PanelHeader({ countyName, stats} : PanelHeaderProps) {
     return (
-        <header className = 'graph-panel__header'>
+        <header className = 'side-panel__header'>
                 <span className = 'graph-panel__header-title text--large text--bold'>{countyName}</span>
                 <div className = 'graph-panel__header-span-wrapper' style = {{display : 'none'}}>
                     <span className = 'graph-panel__header-span text--small'>Pindala:</span>
@@ -72,22 +71,5 @@ function PanelHeader({ countyName, stats} : PanelHeaderProps) {
                     <span className = 'graph-panel__header-span graph-panel__header-value text--small'>{stats.percentage}%</span>
                 </div>
         </header>
-    )
-}
-
-
-/* ----- Panel toolbar defs ----- */
-interface PanelToolbarProp {
-    name : string,
-    size : string
-}
-
-function PanelToolbar({ tools } : { tools : PanelToolbarProp[] }) {
-    return (
-        <div className = 'toolbar__wrapper' style = {{display : "none"}}>
-            {tools.map(tool => (
-                <Icon key = {tool.name} name = {tool.name} size = {tool.size}/>
-            ))}
-        </div>
     )
 }

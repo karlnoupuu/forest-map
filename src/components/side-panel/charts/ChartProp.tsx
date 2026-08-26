@@ -1,4 +1,4 @@
-import type { ForestryData } from "../types/ForestryData";
+import type { ForestryData } from "../../../types/ForestryData";
 
 export interface ChartProp {
     data            : ForestryData; 

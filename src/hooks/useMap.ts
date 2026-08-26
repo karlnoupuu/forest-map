@@ -5,10 +5,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { MAP_CONFIG } from "../config/map";
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 
-
-
-
-export function useMap() {
+export function useMap(darkMode : boolean) {
     const containerRef  = useRef<HTMLDivElement | null>(null);
     const mapRef        = useRef<maplibregl.Map | null>(null);
     const [mapReady, setMapReady]   = useState(false);
@@ -23,8 +20,7 @@ export function useMap() {
             style : {
                 version: 8,
                 sources: {
-                    [MAP_CONFIG.sources.basemap.id] : MAP_CONFIG.sources.basemap.data
-        
+                    [darkMode ? MAP_CONFIG.sources.basemapDark.id : MAP_CONFIG.sources.basemapLight.id] : darkMode ? MAP_CONFIG.sources.basemapDark.data : MAP_CONFIG.sources.basemapLight.data
                 },
                 layers: [
                     MAP_CONFIG.layers.basemap

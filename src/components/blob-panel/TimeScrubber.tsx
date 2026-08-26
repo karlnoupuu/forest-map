@@ -1,7 +1,7 @@
 import type { TimeScrubberProps } from "./TimeScrubberProps";
 import { useEffect, useRef } from "react";
 
-import { TIME_SCRUBBER_RANGE } from "../config/general";
+import { TIME_SCRUBBER_RANGE } from "../../config/general";
 
 export default function TimeScrubber({ selectedYear, setSelectedYear } : TimeScrubberProps) {
     const years = [];

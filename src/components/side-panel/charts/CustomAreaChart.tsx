@@ -5,7 +5,7 @@ export default function CustomAreaChart( { data, xKey, areas } : AreaChartProps 
     if (!data) return null;
 
     return (
-        <AreaChart style = {{ width : '100%', maxWidth : '800px', margin : 'auto', aspectRatio : 1.618}} responsive data = {data}>
+        <AreaChart style = {{ width : '100%', margin : 'auto', aspectRatio : 1.618}} responsive data = {data}>
             <defs>
                 {areas.map(area => (
                     <linearGradient id = {area.dataKey} x1 = '0' y1 = '0' x2 = '0' y2 = '1'>
@@ -33,7 +33,7 @@ export default function CustomAreaChart( { data, xKey, areas } : AreaChartProps 
                 />
             ))}
             <Tooltip formatter = {(value) => Number(value).toFixed(2)}/>
-            <Legend/>
+            <Legend wrapperStyle = {{fontSize : "14px"}}/>
         </AreaChart>
     )
 }

@@ -1,5 +1,5 @@
-import type { ForestryData, DeforestData } from '../types/ForestryData';
-import type { AreaChartArea } from './ChartProp';
+import type { ForestryData, DeforestData } from '../../types/ForestryData';
+import type { AreaChartArea } from '../ChartProp';
 
 export interface GraphProp {
     config          : GraphDef;

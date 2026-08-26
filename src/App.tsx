@@ -1,22 +1,36 @@
 import './App.css';
-import { useState, useRef, useEffect } from 'react';
-import TimeScrubber from './components/TimeScrubber';
-import BlobPanel from './components/BlobPanel';
-import InfoModal from './components/InfoModal';
-import InteractiveMap from './components/InteractiveMap';
-import SidePanel from './components/SidePanel';
+import { useEffect, useState } from 'react';
+import TimeScrubber from './components/blob-panel/TimeScrubber';
+import BlobPanel from './components/blob-panel/BlobPanel';
+import InfoModal from './components/common/InfoModal';
+import InteractiveMap from './components/map/InteractiveMap';
+import SidePanel from './components/side-panel/SidePanel';
+import LoadingScreen from './components/loading-screen/LoadingScreen';
+
+import { useData } from './hooks/useData';
 
 import type { County } from './types';
-import type { ForestryData, DeforestData } from './types/ForestryData';
 
 export const DEFAULT_COUNTY : County = { id : '0000', name : 'Eesti'};
 export const DEFAULT_YEAR   = 2026;
 
 function App() {
+  // TODO: Implement dark mode?
+  // const _prefersDark             = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [darkMode, _setDarkMode] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+  }, [darkMode])
+
   const [selectedCounty,  setSelectedCounty]  = useState<County>(DEFAULT_COUNTY);
   const [selectedYear,    setSelectedYear]    = useState<number>(DEFAULT_YEAR);
-  const [mobileConfirmed, setMobileConfirmed] = useState<boolean>(localStorage.getItem('mobileConfirmed') === 'true');
+  const [mapReady,        setMapReady]        = useState<boolean>(false);
 
+  const { forestryData, deforestData, dataLoaded} = useData();
+  const isLoaded : boolean = dataLoaded && mapReady;
+
+  const [mobileConfirmed, setMobileConfirmed] = useState<boolean>(localStorage.getItem('mobileConfirmed') === 'true');
   const isMobile = ('ontouchstart' in window || navigator.maxTouchPoints > 0) && window.innerWidth < 768;
   
   const dismissModal = () => {
@@ -24,23 +38,9 @@ function App() {
     localStorage.setItem('mobileConfirmed', 'true');
   };
 
-  const forestryData = useRef<ForestryData | null>(null);
-  const deforestData = useRef<DeforestData | null>(null);
-  const [_dataLoaded, setDataLoaded] = useState(false);
-
-  useEffect(() => {
-    Promise.all([
-      fetch('/data/data.json').then(res => res.json()),
-      fetch('/data/data_deforestation_reforestation.json').then(res => res.json()),
-    ]).then(([forestry, deforest]) => {
-      forestryData.current = forestry;
-      deforestData.current = deforest;
-      setDataLoaded(true);
-    })
-  }, []);
-
   return(
     <main className = "app">
+      <LoadingScreen isLoaded = {isLoaded}/>
       {!mobileConfirmed && isMobile && (
         <InfoModal
           infoText      = {'This webapp is optimised for browser use. \nFor the best user experience please switch to a desktop browser.'}
@@ -54,7 +54,9 @@ function App() {
       <InteractiveMap 
         selectedYear      = {selectedYear}
         selectedCounty    = {selectedCounty} 
-        setSelectedCounty = {setSelectedCounty} 
+        setSelectedCounty = {setSelectedCounty}
+        onMapReady        = {setMapReady}
+        darkMode          = {darkMode} 
       />
       <SidePanel 
         selectedYear      = {selectedYear}

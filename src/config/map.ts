@@ -25,6 +25,7 @@ export const MAP_CONFIG = {
                 tiles   : [`https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png?key=${import.meta.env.VITE_CARTO_API_KEY}`],
                 tileSize: 256,
                 maxzoom : 8,
+                attribution : '©<a href="https://carto.com/attributions">CARTO</a> | ©<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             } as SourceSpecification
         },
         basemapDark : {
@@ -34,6 +35,7 @@ export const MAP_CONFIG = {
                 tiles   : [`https://a.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png?key=${import.meta.env.VITE_CARTO_API_KEY}`],
                 tileSize: 256,
                 maxzoom : 8,
+                attribution : '©<a href="https://carto.com/attributions">CARTO</a> | ©<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             } as SourceSpecification
         },
         counties : {

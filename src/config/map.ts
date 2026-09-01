@@ -2,8 +2,8 @@ import type { ImageSourceSpecification, SourceSpecification } from "maplibre-gl"
 
 export const MAP_CONFIG = {
     center: [24.75, 58.6] as [number, number],
-    iniCenter: [25.19, 54.54] as [number, number],
-    iniZoom : 2 as number,
+    iniCenter: [24.75, 58.6] as [number, number],//[25.19, 54.54] as [number, number],
+    iniZoom : 7 as number,
     maxZoom : 7 as number,
     dragPan: false,
     keyboard: false,
@@ -22,7 +22,7 @@ export const MAP_CONFIG = {
             id      : 'cartoBaseMap',
             data    : {
                 type    : 'raster',
-                tiles   : ['https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'],
+                tiles   : [`https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png?key=${import.meta.env.VITE_CARTO_API_KEY}`],
                 tileSize: 256,
                 maxzoom : 8,
             } as SourceSpecification
@@ -31,7 +31,7 @@ export const MAP_CONFIG = {
             id      : 'cartoBaseMap',
             data    : {
                 type    : 'raster',
-                tiles   : ['https://a.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png'],
+                tiles   : [`https://a.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}.png?key=${import.meta.env.VITE_CARTO_API_KEY}`],
                 tileSize: 256,
                 maxzoom : 8,
             } as SourceSpecification

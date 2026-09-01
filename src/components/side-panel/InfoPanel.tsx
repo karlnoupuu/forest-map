@@ -9,7 +9,7 @@ export default function InfoPanel() {
             <div className = 'info-panel__wrapper'>
                 <div className = 'info-panel__content'>
                     {INFO_CONFIG.map(def => (
-                        <InfoSection sectionHeader = {def.header} sectionText = {def.text} />
+                        <InfoSection key = {def.key} sectionHeader = {def.header} sectionText = {def.text} />
                     ))}
                 </div>
             </div>

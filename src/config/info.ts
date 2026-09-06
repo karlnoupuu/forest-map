@@ -1,9 +1,9 @@
 export const INFO_CONFIG = [
-    {
-        key     : 'projectRoots',
-        header  : 'Projekti juured',
-        text    : 'Antud visuaalse kaardirakenduse juurteks on 2026. aasta mais toimunud "Metsikult andmetes 2026" häkaton. Hetkeline lahendus on edasiarendus häkatoni lõpuks saavutatud lahenduse prototüübist, mis oli küll funktsionaalne, kuid piiritletud visuaalse viimistluse ja nõdra koodikvaliteediga. Antud kaardirakenduse puhul on võetud aluseks häkatonil loodud lahendus ning on tehtud suureloomuline ümberkirjutus kasutades React raamistiku ja TypeScript-i.',
-    },
+    // {
+    //     key     : 'projectRoots',
+    //     header  : 'Projekti juured',
+    //     text    : 'Antud visuaalse kaardirakenduse juurteks on 2026. aasta mais toimunud "Metsikult andmetes 2026" häkaton. Hetkeline lahendus on edasiarendus häkatoni lõpuks saavutatud lahenduse prototüübist, mis oli küll funktsionaalne, kuid piiritletud visuaalse viimistluse ja nõdra koodikvaliteediga. Antud kaardirakenduse puhul on võetud aluseks häkatonil loodud lahendus ning on tehtud suureloomuline ümberkirjutus kasutades React raamistiku ja TypeScript-i.',
+    // },
     {
         key     : 'dataSources',
         header  : 'Andmete allikad',

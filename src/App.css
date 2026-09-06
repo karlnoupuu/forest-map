@@ -202,6 +202,10 @@ html, body, #root {
     color: var(--text-primary);
     background-color: var(--bg-primary);
 }
+.recharts-wrapper:focus,
+.recharts-wrapper *:focus {
+  outline: none;
+}
 
 /* ===== Loading screen ===== */
 .loading-screen {

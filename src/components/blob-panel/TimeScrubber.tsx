@@ -48,7 +48,7 @@ export default function TimeScrubber({ selectedYear, setSelectedYear } : TimeScr
                 <span
                     key={year}
                     data-year = {year}
-                    className={year === selectedYear ? 'scrubber__year scrubber__year--selected' : 'scrubber__year'}
+                    className={year === selectedYear ? 'scrubber__year text--medium text--bold scrubber__year--selected' : 'scrubber__year text--small text--normal'}
                     ref = {year === selectedYear ? selectedRef : null}
                 >
                     {year}

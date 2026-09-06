@@ -57,7 +57,7 @@ interface PanelHeaderProps {
 function PanelHeader({ countyName, stats} : PanelHeaderProps) {
     return (
         <header className = 'side-panel__header'>
-                <span className = 'graph-panel__header-title text--large text--bold'>{countyName}</span>
+                <span className = 'graph-panel__header-title text--normal text--bold'>{countyName}</span>
                 <div className = 'graph-panel__header-span-wrapper' style = {{display : 'none'}}>
                     <span className = 'graph-panel__header-span text--small'>Pindala:</span>
                     <span className = 'graph-panel__header-span graph-panel__header-value text--small'>{stats.landArea}km²</span>

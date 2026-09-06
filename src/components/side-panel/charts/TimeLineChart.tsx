@@ -8,8 +8,6 @@ export default function TimeLineChart() {
             style = {{
                 width: '100%',
                 aspectRatio: 1.618,
-                maxWidth: 800,
-                margin: 'auto'
             }}
             responsive data = {data}
         >

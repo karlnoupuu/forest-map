@@ -17,7 +17,7 @@ export default function CustomStackedBarChart( { data, xKey, areas } : AreaChart
     if (!data) return null;
 
     return (
-        <ResponsiveContainer width = '100%' aspect = {1.618}>
+        <ResponsiveContainer width = '100%' aspect = {1.618} style={{margin : 'auto'}}>
             <BarChart
                 data = {data}
                 barSize = {32}

@@ -14,7 +14,7 @@ export default function BlobPanel({timeScrubber } : { timeScrubber : React.React
                 <div className = 'title__container'>
                     <div className = 'title__wrapper'>
                         <Icon name = {'webappIcon'} size = {'large'} />
-                        <span className = 'title__span'>
+                        <span className = 'title__span text--large text--bold'>
                             Metsaavastaja
                         </span>
                     </div>

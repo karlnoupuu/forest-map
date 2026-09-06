@@ -1,3 +1,5 @@
+import type { County } from "../types";
+
 export const DATA_YEAR_RANGES : Record<string, {min : number, max : number}> = {
     forestManaged       : { min : 2004, max : 2020},
     forestComposition   : { min : 2004, max : 2020},
@@ -9,3 +11,6 @@ export const TIME_SCRUBBER_RANGE = {
     min: Math.min(...Object.values(DATA_YEAR_RANGES).map(r => r.min)),
     max: Math.max(...Object.values(DATA_YEAR_RANGES).map(r => r.max)),
 };
+
+export const DEFAULT_COUNTY : County = { id : '0000', name : 'Eesti' };
+export const DEFAULT_YEAR   : number = 2019;

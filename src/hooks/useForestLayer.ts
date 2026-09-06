@@ -1,11 +1,11 @@
+import { useEffect, useRef } from 'react';
 import * as maplibregl from 'maplibre-gl';
 
-import { useEffect, useRef } from 'react';
+import { clampYear } from '../converters';
+
+import { DEFAULT_YEAR, DATA_YEAR_RANGES } from '../config/general';
 import { MAP_CONFIG } from '../config/map';
 
-import { DATA_YEAR_RANGES } from '../config/general';
-import { DEFAULT_YEAR } from '../App';
-import { clampYear } from '../converters';
 
 export function useForestLayer(
     mapRef          : React.RefObject<maplibregl.Map | null>,

@@ -1,9 +1,9 @@
 import { useEffect, useRef }    from 'react';
 import * as maplibregl from 'maplibre-gl';
 import * as GeoJSON from 'geojson';
-import { MAP_CONFIG } from '../config/map';
 
-import { DEFAULT_COUNTY } from '../App';
+import { DEFAULT_COUNTY } from '../config/general';
+import { MAP_CONFIG } from '../config/map';
 
 export function useCountyLayer(
     containerRef        : React.RefObject<HTMLDivElement | null>,

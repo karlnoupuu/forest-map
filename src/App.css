@@ -52,7 +52,10 @@ html, body, #root {
 .text--small    {font-size: 1rem;}
 .text--bold     {font-weight: 550;}
 .text--medium   {font-weight: 450;}
-
+.a__text        {
+    margin: 4px 0px;
+    text-decoration: none;
+}
 
 .app {
     display: flex;
@@ -317,7 +320,7 @@ html, body, #root {
 .info-panel__content {
     display: flex;
     flex-direction: column;
-    padding: 8px;
+    padding: 16px;
     margin: 5px 10px 16px 16px;
 
     background: var(--bg-surface);
@@ -325,7 +328,7 @@ html, body, #root {
     box-shadow: 0 0 5px rgba(0,0,0,0.75);
 }
 .info__content {
-    padding: 0px 0px 8px 8px;
+    padding: 16px;
 }
 
 /* ----- graph section ----- */

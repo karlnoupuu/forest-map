@@ -8,20 +8,18 @@ export default function InfoPanel() {
             </header>
             <div className = 'info-panel__wrapper'>
                 <div className = 'info-panel__content'>
-                    {INFO_CONFIG.map(def => (
-                        <InfoSection key = {def.key} sectionHeader = {def.header} sectionText = {def.text} />
-                    ))}
+                    {INFO_CONFIG.map((block, i) => {
+                        switch (block.type) {
+                            case 'heading':
+                                return <h2 key = {i} className = 'text--normal text--bold'>{block.content}</h2>;
+                            case 'paragraph':
+                                return <p key = {i} className = 'text--small'>{block.content}</p>;
+                            case 'hyperlink':
+                                return <a key = {i} href = {block.link as string} rel = 'noreferrer' target = '_blank' className = 'a__text text--small'>{block.content}</a>;
+                            }
+                    })}
                 </div>
             </div>
-        </section>
-    )
-}
-
-function InfoSection({ sectionHeader, sectionText } : { sectionHeader : string, sectionText : string}) {
-    return (
-        <section className = 'info__content'>
-            <h2 className = 'text--normal text--bold'>{sectionHeader}</h2>
-            <span className = 'text--small'>{sectionText}</span>
         </section>
     )
 }

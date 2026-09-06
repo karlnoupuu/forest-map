@@ -8,7 +8,7 @@ export default function CustomAreaChart( { data, xKey, areas } : AreaChartProps 
         <AreaChart style = {{ width : '100%', margin : 'auto', aspectRatio : 1.618}} responsive data = {data}>
             <defs>
                 {areas.map(area => (
-                    <linearGradient id = {area.dataKey} x1 = '0' y1 = '0' x2 = '0' y2 = '1'>
+                    <linearGradient key = {area.dataKey} id = {area.dataKey} x1 = '0' y1 = '0' x2 = '0' y2 = '1'>
                         <stop offset="0%"   stopColor={area.color} stopOpacity={0.8} />
                         <stop offset="95%"  stopColor={area.color} stopOpacity={0} />
                     </linearGradient>

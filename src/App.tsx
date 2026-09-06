@@ -1,31 +1,30 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
+// Layouts
+import {DesktopLayout, MobileLandscapeLayout, MobileLayout} from './layouts/Layouts';
+
+// Components
 import TimeScrubber from './components/blob-panel/TimeScrubber';
 import BlobPanel from './components/blob-panel/BlobPanel';
 import InteractiveMap from './components/map/InteractiveMap';
 import SidePanel from './components/side-panel/SidePanel';
 import LoadingScreen from './components/loading-screen/LoadingScreen';
 import MobileHeader from './components/MobileHeader';
-
-import {DesktopLayout, MobileLandscapeLayout, MobileLayout} from './layouts/Layouts';
 import MobileLandscapeHeader from './components/MobileLandscapeHeader';
 
+// Hooks
 import { useData } from './hooks/useData';
 import useOrientation from './hooks/useOrientation';
 
+// Types
 import type { County } from './types';
 
-export const DEFAULT_COUNTY : County = { id : '0000', name : 'Eesti'};
-export const DEFAULT_YEAR   = 2019;
+// Config constants
+import { DEFAULT_COUNTY, DEFAULT_YEAR } from './config/general';
+
 
 function App() {
-  // TODO: Implement dark mode?
-  // const _prefersDark             = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const [darkMode, _setDarkMode] = useState(false);
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
-  }, [darkMode])
 
   const [selectedCounty,  setSelectedCounty]  = useState<County>(DEFAULT_COUNTY);
   const [selectedYear,    setSelectedYear]    = useState<number>(DEFAULT_YEAR);
@@ -50,7 +49,6 @@ function App() {
         selectedCounty    = {selectedCounty} 
         setSelectedCounty = {setSelectedCounty}
         onMapReady        = {setMapReady} 
-        darkMode          = {darkMode}
       />}
     panel   = {<SidePanel
         selectedYear      = {selectedYear}

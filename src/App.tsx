@@ -6,6 +6,7 @@ import InfoModal from './components/common/InfoModal';
 import InteractiveMap from './components/map/InteractiveMap';
 import SidePanel from './components/side-panel/SidePanel';
 import LoadingScreen from './components/loading-screen/LoadingScreen';
+import MobileHeader from './components/MobileHeader';
 
 import { useData } from './hooks/useData';
 
@@ -48,9 +49,8 @@ function App() {
           onDismiss     = {dismissModal}
         />
       )}
-      <BlobPanel
-        timeScrubber = {<TimeScrubber selectedYear = {selectedYear} setSelectedYear = {setSelectedYear}/>}
-      />
+      {isMobile && (<MobileHeader timeScrubber = {<TimeScrubber selectedYear = {selectedYear} setSelectedYear = {setSelectedYear}/>}/>)}
+      {!isMobile && (<BlobPanel timeScrubber = {<TimeScrubber selectedYear = {selectedYear} setSelectedYear = {setSelectedYear}/>}/>)}
       <InteractiveMap 
         selectedYear      = {selectedYear}
         selectedCounty    = {selectedCounty} 

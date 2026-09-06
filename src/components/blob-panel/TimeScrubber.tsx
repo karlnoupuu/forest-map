@@ -16,7 +16,8 @@ export default function TimeScrubber({ selectedYear, setSelectedYear } : TimeScr
         requestAnimationFrame(() => {
             selectedRef.current?.scrollIntoView({ 
                 behavior    : isInitial.current ? 'instant' : 'smooth', 
-                block       : 'center'
+                block       : 'center',
+                inline      : 'center',
             });
             isInitial.current = false;
         });

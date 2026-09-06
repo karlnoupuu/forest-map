@@ -488,7 +488,7 @@ html, body, #root {
 @media (max-width: 768px) {
     .app {
         flex-direction: column;
-        height: 100vh;
+        height: 100dvh;
         overflow: hidden;
     }
 
@@ -574,6 +574,7 @@ html, body, #root {
 
 .mobile__header {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;

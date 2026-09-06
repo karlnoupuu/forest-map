@@ -29,7 +29,7 @@ export default function BlobPanel({timeScrubber } : { timeScrubber : React.React
 
 const L_CONFIG = {
     top: {
-        width: 320,
+        width: 256,  
         height: 64,
     },
     bottom: {

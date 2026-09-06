@@ -481,7 +481,7 @@ html, body, #root {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 336px;
+    width: 256px;
     height: 64px;
 }
 .title__icon {

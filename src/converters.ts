@@ -5,9 +5,9 @@ export function convertLandArea(data: ForestryData, year: number, county: string
     .filter(([y]) => Number(y) >= year - 4 && Number(y) < year + 4)
     .map(([y, counties]) => ({
       year: Number(y),
-      stateForest:      counties[county].stateForest.managedForestArea / 1000,
-      privateForest:    counties[county].privateForest.managedForestArea / 1000,
-      totalForest:      counties[county].totalForest.managedForestArea / 1000,
+      stateForest:      Number((counties[county]?.stateForest?.managedForestArea  / 1000 || 0).toFixed(2)),
+      privateForest:    Number((counties[county]?.privateForest?.managedForestArea/ 1000 || 0).toFixed(2)),
+      totalForest:      Number((counties[county]?.totalForest?.managedForestArea  / 1000 || 0).toFixed(2)),
     }));
 }
 
@@ -16,10 +16,12 @@ export function convertTreeComposition(data: ForestryData, year: number, county:
     
     const countyData = data[year][county];
 
+  
+
     return SPECIES_ORDER.map((species, i) => ({
         species : species.toLowerCase(),
-        stateForest: countyData.stateForest.data[i] / countyData.totalForest.managedForestArea * 100,
-        privateForest: countyData.privateForest.data[i] / countyData.totalForest.managedForestArea * 100,
+        stateForest: Number((countyData.stateForest.data[i] / countyData.totalForest.managedForestArea * 100).toFixed(2)),
+        privateForest: Number((countyData.privateForest.data[i] / countyData.totalForest.managedForestArea * 100).toFixed(2)),
     }));
 }
 

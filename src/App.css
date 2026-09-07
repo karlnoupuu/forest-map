@@ -518,6 +518,7 @@ html, body, #root {
 /* ----- Icon related ----- */
 .icon__wrapper          {cursor: pointer;           }
 .icon__wrapper:hover    {color: var(--accent-green);}
+.icon__wrapper--active  {color: var(--accent-green);}
 .icon__wrapper--small   {width: 12px; height: 12px; }
 .icon__wrapper--medium  {width: 24px; height: 24px; }
 .icon__wrapper--large   {width: 36px; height: 36px; }

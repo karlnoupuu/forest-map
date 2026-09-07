@@ -1,14 +1,15 @@
 import { INFO_CONFIG } from "../../config/info"
+import type { InfoBlock } from "../../config/info";
 
-export default function InfoPanel() {
+export default function InfoPanel({ config } : { config? : InfoBlock[] }) {
     return (
         <section className = 'side-panel__content'>
             <header className = 'side-panel__header'>
                 <span className = 'text--normal text--bold'>Info</span>
             </header>
             <div className = 'info-panel__wrapper'>
-                <div className = 'info-panel__content'>
-                    {INFO_CONFIG.map((block, i) => {
+                <div className = 'info-panel__content' data-testid = "infoPanelContent">
+                    {(config ? config : INFO_CONFIG).map((block, i) => {
                         switch (block.type) {
                             case 'heading':
                                 return <h2 key = {i} className = 'text--normal text--bold'>{block.content}</h2>;

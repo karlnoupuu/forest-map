@@ -1,4 +1,4 @@
-interface InfoBlock {
+export interface InfoBlock {
     type    : 'heading' | 'paragraph' | 'hyperlink',
     content : string | string[]
     link?   : string

@@ -43,7 +43,7 @@ export default function TimeScrubber({ selectedYear, setSelectedYear } : TimeScr
 
 
     return (
-        <div className = "scrubber__wrapper" onClick={handleYearClick} onWheel={handleScroll}>
+        <div className = "scrubber__wrapper" onClick={handleYearClick} onWheel={handleScroll} data-testid = {'timescrubber'}>
             {years.map(year => (
                 <span
                     key={year}

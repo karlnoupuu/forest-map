@@ -9,7 +9,9 @@ import { Icon } from "../common/Icon";
 import type { ReactNode } from "react";
 
 export function Graph({ config, selectedCounty, selectedYear, data } : GraphProp) {
-    const [showTooltip, setShowTooltip] = useState(false);
+    const [hovered, setHovered] = useState(false);
+    const [pinned, setPinned]   = useState(false);
+
     const inRange = selectedYear >= config.dataRange.min && selectedYear <= config.dataRange.max;
     const effectiveYear = clampYear(selectedYear, config.dataRange);
 
@@ -29,9 +31,9 @@ export function Graph({ config, selectedCounty, selectedYear, data } : GraphProp
         <section className = 'graph__wrapper'>
             <header className = 'graph__header'>
                 <span className = 'graph__title text--normal text--bold'>{config.title}</span>
-                {inRange ? <Icon name = {'questionMarkCircle'} size = {'medium'} onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}/> : ''}
+                {inRange ? <Icon name = {'questionMarkCircle'} size = {'medium'} onClick = {() => {setPinned(!pinned); setHovered(false)}} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}/> : ''}
             </header>
-            <Tooltip text = {config.tooltip} visible = {showTooltip}/>
+            <Tooltip text = {config.tooltip} visible = {hovered || pinned}/>
             <div className = 'graph__content'>
                 {inRange 
                     ? CHARTS[config.type]

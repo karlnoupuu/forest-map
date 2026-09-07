@@ -49,7 +49,7 @@ export interface DeforestationData {
     stateForest     : number;
     privateForest   : number;
     totalForest     : number;
-    otherFOrest     : number;
+    otherForest     : number;
 }
 export interface ReforestationData {
     totalForest     : number;

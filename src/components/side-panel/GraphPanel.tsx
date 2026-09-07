@@ -41,7 +41,7 @@ export default function GraphPanel(
                 </div>
             </div>
         </section>
-    )
+    );
 }
 
 /* ----- Panel header defs ----- */
